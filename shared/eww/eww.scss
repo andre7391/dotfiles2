@@ -1,0 +1,116 @@
+// colors
+$background: #1A1B26;
+$foreground: #A9B1D6;
+
+
+$black: #24283B;
+$gray: #565F89;
+$red: #F7768E;
+$green: #73DACA;
+$yellow: #E0AF68;
+$blue: #7AA2F7;
+$magenta: #565F89;
+$cyan: #7DCFFF;
+$white: $foreground;
+$purple: #7d63ad;
+
+// global
+$spacing: 4px;
+$radius: 4px;
+
+* {
+  all: unset;
+  font-family: "JetBrains Mono", "Font Awesome 6 Free";
+  font-size: 12px;
+  color: $black;
+}
+
+.icon {
+  font-weight: 900;
+}
+
+// round corners
+.round {
+  border-radius: $radius;
+  padding-left: $spacing;
+  padding-right: $spacing;
+  margin-left: $spacing;
+
+}
+
+.round-left {
+  border-radius: $radius 0 0 $radius;
+  padding-left: $spacing;
+  margin-left: $spacing;
+}
+
+.round-right {
+  border-radius: 0 $radius $radius 0;
+  padding-right: $spacing;
+}
+
+// square corners
+.square {
+  padding-left: $spacing;
+  padding-right: $spacing;
+  margin-left: #{$spacing / 2};
+}
+
+.square-left {
+  padding-left: $spacing;
+  margin-left: #{$spacing / 2};
+}
+
+.square-right {
+  padding-right: $spacing;
+}
+
+
+
+
+
+// bar
+.bar {
+  background-color: $background;
+  padding: $spacing $spacing $spacing 0;
+}
+
+// date 
+.date {
+  background-color: $green;
+}
+
+// audio
+.audio {
+  background-color: $cyan;
+}
+
+// wifi
+.wifi {
+  background-color: $yellow;
+}
+
+// workspace
+.workspace {
+  background-color: $magenta;
+}
+
+.workspace.focused {
+  background-color: $blue;
+}
+
+.workspace.urgent {
+  background-color: $red;
+}
+
+// performance
+.performance {
+  background-color: $purple;
+}
+
+// nix
+.nix {
+  background-color: $cyan;
+  font-weight: 400;
+  font-size: 14px;
+}

@@ -1,0 +1,155 @@
+# mod key
+set $mod Mod4
+set $primary_display HDMI-1 DP-1
+set $secondary_display eDP-1
+
+# custom configs
+include ~/.config/i3/custom
+
+# programs
+#exec --no-startup-id udiskie
+exec --no-startup-id picom --daemon --config ~/.config/picom/picom.conf 
+exec --no-startup-id eww open bar-window
+exec_always --no-startup-id feh --bg-fill $(shuf -e -n1 ~/.config/wallpapers/*)
+
+# font
+font pango:Droid Sans Mono, 8
+
+# floating window position
+floating_modifier $mod
+
+# start terminal
+bindsym $mod+q exec alacritty
+
+# kill focused window
+bindsym $mod+c kill
+
+# program launcher
+bindsym $mod+d exec "rofi -show drun"
+# bindsym $mod+d exec --no-startup-id dmenu_run
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h splith
+
+# split in vertical orientation
+bindsym $mod+v splitv
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# move window scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# show and cycle scratchpad
+bindsym $mod+minus scratchpad show
+
+bindsym $mod+l exec i3lock; mode "default"
+
+
+# create workspaces in primary display
+workspace 1 output $primary_display $secondary_display
+workspace 2 output $primary_display $secondary_display
+workspace 3 output $primary_display $secondary_display
+workspace 4 output $primary_display $secondary_display
+workspace 5 output $primary_display $secondary_display
+workspace 6 output $primary_display $secondary_display
+workspace 7 output $primary_display $secondary_display
+workspace 8 output $primary_display $secondary_display
+workspace 9 output $primary_display $secondary_display
+workspace S output $secondary_display $primary_display
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace S
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace S
+
+# reload
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+
+# resize mode
+mode "resize" {
+    # arrow keys bindings
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    # back to normal
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# exit mode
+mode "[l]ogout, [r]eboot, [s]hutdown, loc[k]" {
+    # exit keys bindings
+    #bindsym l exec i3-msg exit
+    bindsym r exec systemctl reboot
+    bindsym s exec shutdown -h 0
+    bindsym k exec i3lock; mode "default"
+
+    # back to normal
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym $mod+x mode "default"
+}
+bindsym $mod+x mode "[l]ogout, [r]eboot, [s]hutdown, loc[k]"
+
+
+
+
+# gaps
+gaps inner 2
+
+# bar {
+#         status_command i3status
+# }

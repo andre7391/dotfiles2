@@ -1,0 +1,443 @@
+;; bar-window
+(defwindow bar-window
+  :monitor 0
+  :exclusive true
+  :wm-ignore false
+  :geometry (geometry
+    :width "100%"
+    :anchor "center top"
+  )
+  (bar)
+)
+
+;; bar
+(defwidget bar []
+  (box
+    :class "bar"
+    (start)
+    (end)
+  )
+)
+
+;; end
+(defwidget end []
+  (box
+    :halign "end"
+    :space-evenly false
+    (wifi)
+    (audio)
+    (date)
+    
+  )
+)
+
+;; date
+(defwidget date []
+  (eventbox
+    :onclick "scripts/popup calendar"
+    :cursor "pointer"
+    (box
+      :class "date round"
+      :space-evenly false
+      (label
+        :class "icon"
+        :text " "
+      )
+      "${date}"
+    )
+  )
+)
+(defpoll date
+  :interval "1s"
+  "date +'%A %d.%m.%y - %H:%M:%S'"
+)
+
+;; audio
+(defwidget audio []
+  (box
+    :space-evenly false
+    (audio-output)
+    (audio-input)
+  )
+)
+
+;; audio-output
+(defwidget audio-output []
+  (eventbox
+    :cursor "pointer"
+    :onscroll "scripts/audio set_output_volume {}"
+    :onclick "scripts/audio toggle_output_mute"
+    (box
+      :space-evenly false
+      :class "audio round-left square-right"
+      (box
+        :class "icon"
+        "${audio-output-icon}"
+      )
+      {audio-output-volume == "mute" ? " " : "${audio-output-volume}%"}
+    )
+  )
+)
+(deflisten audio-output-volume
+  "scripts/audio subscribe_output_volume"
+)
+(deflisten audio-output-icon
+  "scripts/audio subscribe_output_icon"
+)
+
+;; audio-input
+(defwidget audio-input []
+  (eventbox
+    :cursor "pointer"
+    :onscroll "scripts/audio set_input_volume {}"
+    :onclick "scripts/audio toggle_input_mute"
+    (box
+      :space-evenly false
+      :class "audio square-left round-right"
+      (box
+        :class "icon"
+        "${audio-input-icon}"
+      )
+      {audio-input-volume == "mute" ? " " : "${audio-input-volume}%"}
+    )
+  )
+)
+(deflisten audio-input-volume
+  "scripts/audio subscribe_input_volume"
+)
+(deflisten audio-input-icon
+  "scripts/audio subscribe_input_icon"
+)
+
+;; wifi
+(defwidget wifi []
+  (eventbox
+    :onclick "scripts/popup wifi"
+    :cursor "pointer"
+    (box
+      :space-evenly false
+      :class "wifi round"
+      (label
+        :class "icon"
+        :text " "
+      )
+      "${wifi-text}"
+    )
+  )
+)
+(defpoll wifi-text
+  :interval "5s"
+  "scripts/wifi text"
+)
+
+
+;; start
+(defwidget start []
+  (box
+    :halign "start"
+    :space-evenly false
+    (performance)
+    (workspaces)
+    ;;(control)
+    ;;(separator)
+  )
+)
+
+;; workspaces
+(defwidget workspaces []
+  (literal
+    :content workspace
+  )
+)
+(deflisten workspace
+  "scripts/workspace"
+)
+
+;; performance
+(defwidget performance []
+  (eventbox
+    :cursor "pointer"
+    (box
+      :space-evenly false
+      (nix)
+      (cpu_usage)
+      (cpu_temperature)
+      (memory_usage)
+      (disk_usage)
+      (network_usage)
+    )
+  )
+)
+
+(defwidget memory_usage []
+  (box
+    :space-evenly false
+    :class "performance square"
+    (label
+      :class "icon"
+      :text " "
+    )
+    "${round(EWW_RAM.available_mem / 1073741824, 1)}G"
+  )
+)
+
+(defwidget cpu_usage []
+  (box
+    :space-evenly false
+    :class "performance round-left square-right"
+    (label
+      :class "icon"
+      :text " "
+    )
+    "${round(EWW_CPU.avg, 0)}%"
+  )
+)
+
+(defwidget cpu_temperature []
+  (box
+    :space-evenly false
+    :class "performance square"
+    (label
+      :class "icon"
+      :text " "
+    )
+    "${round(EWW_TEMPS[param_cpu_temperature], 0)}°C"
+  )
+  
+)
+(defvar param_cpu_temperature
+  "CORETEMP_PACKAGE_ID_0"
+)
+
+(defwidget disk_usage []
+  (box
+    :space-evenly false
+    :class "performance square"
+    (label
+      :class "icon"
+      :text " "
+    )
+    "${round(EWW_DISK['/'].free / 1073741824, 1)}G"
+  )
+)
+
+(defwidget network_usage []
+  (box
+    :space-evenly false
+    :class "performance square-left round-right"
+    (label
+      :class "icon"
+      :text " "
+    )
+    "${round(EWW_NET[param_network_interface].NET_DOWN/260000, 1)}M"
+  )
+)
+(defvar param_network_interface
+  "wlp2s0"
+)
+
+(defwidget nix []
+  (box
+    :space-evenly false
+    (label
+      :class "nix round icon"
+      :text ""
+    )
+  )
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;; power
+(defwidget power-menu []
+  (eventbox
+    :onhover "eww update show-power-menu=true"
+    :onhoverlost "eww update show-power-menu=false"
+    :cursor "pointer"
+    (box
+      :space-evenly "false"
+      :class "power-menu"
+      (invisible-separator)
+      (invisible-separator)
+      (button
+        :class "button nix"
+        ;;:onclick "shutdown now"
+        "󱄅"
+      )
+      (invisible-separator)
+      (revealer
+        :transition "slideright"
+        :reveal show-power-menu
+        :duration "400ms"
+        (box
+          :space-evenly "false"
+          (invisible-separator)
+          (button
+            :class "button shutdown"
+            :onclick "shutdown now"
+            "󰤆"
+          )
+          (invisible-separator)
+          (button
+            :class "button logout"
+            :onclick "sway exit"
+            "󰈆"
+          )
+          (invisible-separator)
+          (button
+            :class "button lock"
+            :onclick "betterlockscreen -l"
+            "󰍁"
+          )
+          (invisible-separator)
+          (button
+            :class "button reboot"
+            :onclick "reboot"
+            "󰑐"
+          )
+          (invisible-separator)
+        )
+      )
+      
+    )
+  )
+)
+(defvar show-power-menu false)
+
+
+
+
+
+
+
+
+
+
+;; Created   by https://github.com/rxyhn
+;; Designed  by https://github.com/rxyhn
+;; Maintaned by https://github.com/rxyhn
+
+(defvar eww "eww")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;							Widget Section's							 ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Launcher Widgets ;;
+(defwidget launcher []
+  (box :orientation "v"
+    :space-evenly "false"
+    :spacing -15
+    (button :class "launcher_icon"
+    :onclick "scripts/popup launcher"  "")))
+
+
+
+;; Battery Widgets ;;
+(defwidget bat []
+  (box	:orientation "v"
+    :space-evenly "false"
+    (label	:class "bat"
+      :halign "end"
+      :text battery
+    :tooltip "Battery: ${battery-cappacity}%")))
+(defpoll battery			:interval "1s"	"scripts/battery icon")
+(defpoll battery-cappacity	:interval "1s"	"scripts/battery percent")
+
+
+
+;; Brightness Widgets ;;
+(defwidget bright []
+  (eventbox :onhover "${eww} update bright=true"
+    :onhoverlost "${eww} update bright=false"
+    (box    :orientation "v"
+      :space-evenly "false"
+      :spacing 2
+      (revealer :transition "slideup"
+        :reveal bright
+        :duration "550ms"
+        (scale :class "bribar"
+          :value current-brightness
+          :tooltip "Brightness: ${current-brightness}%"
+          :onchange "brightnessctl set {}%"
+          :orientation "v"
+          :flipped true
+          :max 101
+        :min 0))
+      (label :class "brightness-icon"
+      :text ""))))
+(defpoll current-brightness :interval "1s" "brightnessctl -m -d amdgpu_bl0 | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
+(defvar bright false)
+
+
+
+
+
+
+(defpoll calendar_day :interval "10h" "date '+%d'")
+(defpoll calendar_month :interval "10h" "scripts/calendar")
+(defpoll calendar_year :interval "10h" "date '+%Y'")
+;; Calendar Widgets ;;
+(defwidget cal []
+  (box :class "cal-box"
+    :orientation "v"
+    (box :class "cal-inner-box"
+      (calendar :class "cal"
+      ))))
+
+
+
+;; Top Widgets ;;
+(defwidget top []
+  (box	:orientation "v"
+    :space-evenly "false"
+    :valign "start"
+    (launcher)
+    (workspaces)))
+
+
+
+;; End Widgets ;;
+(defwidget eaand []
+  (box :orientation "v"
+    :space-evenly "false"
+    :valign "end"
+    :spacing 5
+    (bottom)))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;							Window Section's							 ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Bar Windows ;;
+
+
+;; Calendar Windows ;;
+(defwindow calendar
+  :monitor 1
+  :geometry (geometry :x "70px"
+    :y "65%"
+    :width "270px"
+  :height "60px")
+  :reveal false
+  
+  (cal))
+
+
+
+
+

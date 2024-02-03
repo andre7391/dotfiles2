@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# xprop -root -spy NOME
+
+# print workspaces
+print_workspaces() {
+
+    i3-msg -t get_workspaces | sed -E 's/\},\s*\{/\},\n\{/g' | ( 
+        while read workspace ; do
+        
+            name=$(echo $workspace | cut -d ':' -f 4 | cut -d ',' -f 1 | tr -d '"')
+            
+            if [[ "$workspace" = *"focused\":true"* ]]; then
+                class="workspace focused"   
+            elif [[ "$workspace" = *"urgent\":true"* ]]; then
+                class="workspace urgent"
+            else 
+                class="workspace"
+            fi
+
+            if [[ "$workspace" = *"["* ]]; then
+                class="$class round-left square-right"
+            elif [[ "$workspace" = *"["* ]]; then
+                class="$class round-left square-right"
+            elif [[ "$workspace" = *"]"* ]]; then
+                class="$class square-left round-right"
+            else 
+                class="$class square"
+            fi
+            output="$output (eventbox :cursor \"hand\" :onclick \"i3-msg workspace $name\" (label :class \"$class\" :text \"$name\"))"
+        done
+
+        echo "(box :space-evenly false :class \"workspaces\" $output)"
+    )
+}
+
+# listen to i3 changes
+print_workspaces
+
+while true ; do
+    i3-msg -t subscribe '[ "workspace" ]' | while read -r _ ; do
+        print_workspaces
+    done 
+done

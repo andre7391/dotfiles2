@@ -1,0 +1,61 @@
+# helper to symlink files
+function symlink() {
+    if [ -f $2 ] || [ -d $2 ] && ! [ -L $2 ]; then
+        mv $2 "$1-backup"
+    fi
+    if ! [ -e $2 ]; then
+        mkdir -p $2
+    fi
+    rm -r $2
+    ln -s $(realpath -s $1) $2
+}
+
+# helper to setup all shared configs
+function shared() {
+    # i3
+    symlink shared/i3/config ~/.config/i3/config
+
+    # picom
+    symlink shared/picom/picom.conf ~/.config/picom/picom.conf
+
+    # alacritty
+    symlink shared/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
+
+    # eww 
+    symlink shared/eww ~/.config/eww
+
+    # wallpapers
+    symlink shared/wallpapers ~/.config/wallpapers
+}
+
+# helper to setup hades config
+function hades() {
+
+    # shared configs
+    shared
+
+    # i3
+    symlink hades/i3/custom ~/.config/i3/custom
+    symlink hades/i3/scripts ~/.config/i3/scripts
+}
+
+# execute a function passsed as argument (ex: setup shared_symlink)
+"$@"
+
+
+
+# # i3
+# symlink i3/config ~/.config/i3/config
+
+# # picom
+# symlink picom/picom.conf ~/.config/picom/picom.conf
+
+# # alacritty
+# symlink alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
+
+# # eww 
+# symlink eww ~/.config/eww
+
+# # wallpapers
+# #symlink wallpapers  
+
