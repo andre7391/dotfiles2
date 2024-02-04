@@ -150,6 +150,6 @@ bindsym $mod+x mode "[l]ogout, [r]eboot, [s]hutdown, loc[k]"
 # gaps
 gaps inner 2
 
-# bar {
-#         status_command i3status
-# }
+bar {
+        status_command i3status
+}

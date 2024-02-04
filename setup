@@ -1,5 +1,43 @@
-# helper to symlink files
-function symlink() {
+#!/bin/bash
+
+########################################
+# Verify if a package / app is installed
+#
+# Arguments:
+#   $1 - Command to execute the program / app
+########################################
+installed() {
+    [ -x "$(command -v $1)" ]    
+}
+
+########################################
+# Install package using yay package manager
+#
+# Arguments:
+#   $1 - Command to execute the program / app
+#   $2 - Package name at arch/aur repository
+########################################
+yay-install () {
+    if ! installed $1 ; then
+        if ! [ -z "$2" ]; then 
+            yay -S --noconfirm $2 > /dev/null
+        else 
+            yay -S --noconfirm $1 > /dev/null
+        fi
+        echo "installed successfully: [$1]"
+    else
+        echo "already installed: [$1]"
+    fi
+}
+
+########################################
+# Helper to symlink files e make automatic backups
+#
+# Arguments:
+#   $1 - File or folder to be symlinked
+#   $2 - Destiny where the synlink will be created
+########################################
+symlink() {
     if [ -f $2 ] || [ -d $2 ] && ! [ -L $2 ]; then
         mv $2 "$1-backup"
     fi
@@ -8,35 +46,83 @@ function symlink() {
     fi
     rm -r $2
     ln -s $(realpath -s $1) $2
+    
+    echo "symlink created from: [$1] to [$2]"
 }
 
-# helper to setup all shared configs
-function shared() {
-    # i3
-    symlink shared/i3/config ~/.config/i3/config
 
-    # picom
-    symlink shared/picom/picom.conf ~/.config/picom/picom.conf
 
-    # alacritty
-    symlink shared/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
 
-    # eww 
-    symlink shared/eww ~/.config/eww
 
-    # wallpapers
-    symlink shared/wallpapers ~/.config/wallpapers
+########################################
+# Function to install all common packages used in arch
+#
+# Arguments:
+#   None
+########################################
+install-common-arch() {
+
+    echo -e "\n:: starting common packages arch"
+
+    yay-install xrandr xorg-xrandr
+    yay-install bspwm
+    yay-install sxhkd
+    yay-install polybar
+    yay-install picom
+    yay-install dmenu
+    yay-install dunst
+    yay-install nitrogen
+    yay-install alacritty
+    yay-install thunar
+   # yay-install eww eww-x11
+
+    echo -e ":: finished common packages arch\n"
+}
+
+
+########################################
+# Function to symlink all common configs
+#
+# Arguments:
+#   None
+########################################
+symlink-common() {
+
+    echo -e "\n:: starting common symlinks"
+
+    symlink common/i3/config ~/.config/i3/config
+    symlink common/picom/picom.conf ~/.config/picom/picom.conf
+    symlink common/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
+    symlink common/eww ~/.config/eww
+    symlink common/wallpapers ~/.config/wallpapers
+
+    echo -e ":: finished common symlinks\n"
+
 }
 
 # helper to setup hades config
-function hades() {
+hades() {
 
     # shared configs
-    shared
+    symlink-common
 
     # i3
     symlink hades/i3/custom ~/.config/i3/custom
     symlink hades/i3/scripts ~/.config/i3/scripts
+}
+
+# helper to setup hades config
+zeus() {
+
+    # common packages
+    install-common-arch
+
+    # common symlinks
+    symlink-common
+
+    # i3
+    symlink zeus/i3/custom ~/.config/i3/custom
+    symlink zeus/i3/scripts ~/.config/i3/scripts
 }
 
 # execute a function passsed as argument (ex: setup shared_symlink)
