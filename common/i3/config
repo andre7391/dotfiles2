@@ -1,6 +1,6 @@
 # mod key
 set $mod Mod4
-set $primary_display HDMI-1 DP-1
+set $primary_display HDMI-1 DisplayPort-0
 set $secondary_display eDP-1
 
 # custom configs
@@ -9,7 +9,6 @@ include ~/.config/i3/custom
 # programs
 #exec --no-startup-id udiskie
 exec --no-startup-id picom --daemon --config ~/.config/picom/picom.conf 
-exec --no-startup-id eww open bar-window
 exec_always --no-startup-id feh --bg-fill $(shuf -e -n1 ~/.config/wallpapers/*)
 
 # font
@@ -40,19 +39,18 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
 # split in horizontal orientation
 bindsym $mod+h splith
 
 # split in vertical orientation
 bindsym $mod+v splitv
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -62,6 +60,8 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
+bindsym $mod+s focus child
+
 
 # move window scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -109,7 +109,6 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace S
 
 # reload
-bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
@@ -117,10 +116,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # resize mode
 mode "resize" {
     # arrow keys bindings
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Left resize shrink width 10 px
+    bindsym Down resize grow height 10 px
+    bindsym Up resize shrink height 10 px
+    bindsym Right resize grow width 10 px
 
     # back to normal
     bindsym Return mode "default"
@@ -132,7 +131,7 @@ bindsym $mod+r mode "resize"
 # exit mode
 mode "[l]ogout, [r]eboot, [s]hutdown, loc[k]" {
     # exit keys bindings
-    #bindsym l exec i3-msg exit
+    bindsym l exec i3-msg exit
     bindsym r exec systemctl reboot
     bindsym s exec shutdown -h 0
     bindsym k exec i3lock; mode "default"
@@ -151,5 +150,5 @@ bindsym $mod+x mode "[l]ogout, [r]eboot, [s]hutdown, loc[k]"
 gaps inner 2
 
 bar {
-        status_command i3status
+    status_command polybar
 }

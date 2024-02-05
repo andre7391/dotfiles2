@@ -74,6 +74,8 @@ install-common-arch() {
     yay-install nitrogen
     yay-install alacritty
     yay-install thunar
+    yay-install rofi
+    yay-install feh
    # yay-install eww eww-x11
 
     echo -e ":: finished common packages arch\n"
@@ -95,6 +97,13 @@ symlink-common() {
     symlink common/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
     symlink common/eww ~/.config/eww
     symlink common/wallpapers ~/.config/wallpapers
+    symlink common/bspwm/bspwmrc ~/.config/bspwm/bspwmrc
+    symlink common/dunst/dunstrc ~/.config/dunst/dunstrc
+    symlink common/polybar/config.ini ~/.config/polybar/config.ini
+    symlink common/sxhkd/sxhkdrc ~/.config/sxhkd/sxhkdrc
+    symlink common/xinit/.xinitrc ~/.xinitrc
+
+
 
     echo -e ":: finished common symlinks\n"
 

@@ -2,4 +2,4 @@
 # refresh display
 #bindsym $mod+p exec --no-startup-id ~/.config/i3/scripts refresh_display
 
-#exec --no-startup-id ~/.config/i3/scripts config_display
+exec --no-startup-id ~/.config/i3/scripts config-display
