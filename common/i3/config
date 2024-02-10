@@ -147,8 +147,8 @@ bindsym $mod+x mode "[l]ogout, [r]eboot, [s]hutdown, loc[k]"
 
 
 # gaps
-gaps inner 2
+gaps inner 5
 
 bar {
-    status_command polybar
+ #   status_command polybar
 }

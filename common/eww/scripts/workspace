@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# xprop -root -spy NOME
-
-# print workspaces
-print_workspaces() {
-
+########################################
+# Function to print workspaces tags to be used in eww
+#
+# Arguments:
+#   None
+########################################
+print-workspaces() {
     i3-msg -t get_workspaces | sed -E 's/\},\s*\{/\},\n\{/g' | ( 
         while read workspace ; do
         
@@ -34,11 +36,22 @@ print_workspaces() {
     )
 }
 
-# listen to i3 changes
-print_workspaces
+########################################
+# Print workspaces tags when something has changed
+#
+# Arguments:
+#   None
+########################################
+watch-workspaces() {
 
-while true ; do
-    i3-msg -t subscribe '[ "workspace" ]' | while read -r _ ; do
-        print_workspaces
-    done 
-done
+    # 
+    while true; do
+        pkill xprop
+        xprop -root -spy _NET_CURRENT_DESKTOP | while read -r _ ; do
+            print-workspaces
+        done &
+        sleep 10
+    done
+}
+
+"$@"

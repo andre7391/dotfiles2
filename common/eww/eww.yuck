@@ -150,7 +150,7 @@
   )
 )
 (deflisten workspace
-  "scripts/workspace"
+  "scripts/workspace watch-workspaces"
 )
 
 ;; performance
