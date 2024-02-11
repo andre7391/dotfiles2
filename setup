@@ -20,15 +20,16 @@ installed() {
 yay-install () {
     if ! installed $1 ; then
         if ! [ -z "$2" ]; then 
-            yay -S --noconfirm $2 > /dev/null
+            yay -S --needed --noconfirm $2 > /dev/null
         else 
-            yay -S --noconfirm $1 > /dev/null
+            yay -S --needed --noconfirm $1 > /dev/null
         fi
         echo "installed successfully: [$1]"
     else
         echo "already installed: [$1]"
     fi
 }
+
 
 ########################################
 # Helper to symlink files e make automatic backups
@@ -53,6 +54,54 @@ symlink() {
 
 
 
+########################################
+# Install package eww in arch
+#
+# Arguments:
+#   None
+########################################
+install-eww-arch () {
+
+
+    # if ! installed eww ; then
+    #     install=T
+    # else
+    
+    #     installed-version=$(eww --version | cut -d ' ' -f2)
+    #     last-version=$(git ls-remote --sort=committerdate https://github.com/elkowar/eww refs/tags/* | cut -f2 | tail -1)
+        
+    #     if [[ $last-version =~ "*" ]]; then echo "string contains asterisk"; fi
+    # fi
+
+
+    # check if eww is installed
+    if ! installed eww ; then
+
+        # install dependencies
+        yay -S --needed --noconfirm gtk3 pango gdk-pixbuf2 cairo glib2 gcc-libs glibc > /dev/null
+
+        dir=$(pwd)
+        
+        # checkout eww repository
+        git clone https://github.com/elkowar/eww /tmp/eww-install
+
+        # build eww
+        cd /tmp/eww-install
+        cargo build --release --no-default-features --jobs 1 --features x11 
+        chmod +x target/release/eww
+        
+        # install eww in /usr/bin
+        sudo chown root:root target/release/eww
+        sudo cp target/release/eww /usr/bin
+
+        cd $dir
+
+        echo "installed successfully: [eww]"
+    else
+        echo "already installed: [eww]"
+    fi
+}
+
 
 ########################################
 # Function to install all common packages used in arch
@@ -64,6 +113,7 @@ install-common-arch() {
 
     echo -e "\n:: starting common packages arch"
 
+    # install arch packages
     yay-install xrandr xorg-xrandr
     yay-install bspwm
     yay-install sxhkd
@@ -76,9 +126,32 @@ install-common-arch() {
     yay-install thunar
     yay-install rofi
     yay-install feh
-   # yay-install eww eww-x11
+    yay-install unzip
+
+    # isntall eww
+    install-eww-arch
 
     echo -e ":: finished common packages arch\n"
+}
+
+
+########################################
+# Function to install fonts
+#
+# Arguments:
+#   None
+########################################
+install-fonts() {
+
+    echo -e "\n:: starting common fonts"
+
+    sudo mkdir -p /usr/share/fonts/common
+    sudo cp -r common/fonts/* /usr/share/fonts/common
+    sudo chown -R root:root /usr/share/fonts/common
+    sudo fc-cache -f -v >> /dev/null
+
+    echo -e ":: finished common fonts\n"
+
 }
 
 
@@ -103,8 +176,6 @@ symlink-common() {
     symlink common/sxhkd/sxhkdrc ~/.config/sxhkd/sxhkdrc
     symlink common/xinit/.xinitrc ~/.xinitrc
 
-
-
     echo -e ":: finished common symlinks\n"
 
 }
@@ -122,6 +193,9 @@ hades() {
 
 # helper to setup hades config
 zeus() {
+
+    # install-fonts
+    install-fonts
 
     # common packages
     install-common-arch
