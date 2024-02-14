@@ -78,7 +78,44 @@ common.symlink.home() {
     common.symlink wallpapers ~/.config/wallpapers
     common.symlink dunst/dunstrc ~/.config/dunst/dunstrc
     common.symlink xinit/.xinitrc ~/.xinitrc
+    common.symlink flavours ~/.config/flavours
+
+
+    common.symlink themes ~/.themes
+    common.symlink themes/gtk2 ~/.gtkrc-2.0
+    common.symlink themes/gtk3 ~/.config/gtk-3.0/settings.ini
+    common.symlink themes/xsettings ~/.config/xsettingsd/xsettingsd.conf
 
     echo -e ":: finished common symlinks\n"
 
+}
+
+common::copy_to_root() {
+    
+    # udisks2 config
+    if ! [ -f $2 ] && ! [ -d $2 ] ; then
+        sudo cp -r $1 $2
+        sudo chown -R root:root $2
+        echo "file copied from: [$1] to [$2]"
+    else
+        echo "file already exists: [$2]"
+    fi
+}
+
+
+
+########################################
+# Function to configure udisks2 and mounting point
+#
+# Arguments:
+#   None
+########################################
+common::udisks2() {
+
+    echo -e "\n:: starting udisks2 config"
+
+    common::copy_to_root udisks2/99-udisks2.rules /etc/udev/rules.d/99-udisks2.rules
+    common::copy_to_root udisks2/media.conf /etc/tmpfiles.d/media.conf
+
+    echo -e ":: finished udisks2 configs\n"
 }

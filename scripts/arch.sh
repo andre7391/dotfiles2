@@ -66,7 +66,7 @@ arch.install.eww () {
         (
             # build eww
             cd /tmp/eww-install
-            cargo build --release --no-default-features --jobs 1 --features x11 
+            cargo build --release --no-default-features --features x11 
             chmod +x target/release/eww
             
             # install eww in /usr/bin

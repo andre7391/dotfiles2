@@ -1,76 +1,25 @@
-# Dracula theme for Alacritty
-# https://draculatheme.com/alacritty
-#
-# Color palette
-# https://spec.draculatheme.com
-#
-# Instructions
-# https://github.com/alacritty/alacritty/blob/master/extra/man/alacritty.5.scd
+import = [
+    "~/.config/alacritty/base16.toml"
+]
 
-[colors.primary]
+[font]
+size = 12.0
 
-background = "#282a36"
-foreground = "#f8f8f2"
-bright_foreground = "#ffffff"
+[font.bold]
+family = "UbuntuMono Nerd Font"
+style = "Bold"
 
-[colors.cursor]
+[font.bold_italic]
+family = "UbuntuMono Nerd Font"
+style = "Bold Italic"
 
-text = "#282a36"
-cursor = "#f8f8f2"
+[font.italic]
+family = "UbuntuMono Nerd Font"
+style = "Italic"
 
-[colors.vi_mode_cursor]
+[font.normal]
+family = "UbuntuMono Nerd Font"
+style = "Regular"
 
-text = "CellBackground"
-cursor = "CellForeground"
-
-[colors.selection]
-
-text = "CellForeground"
-background = "#44475a"
-
-[colors.normal]
-
-black = "#21222c"
-red = "#ff5555"
-green = "#50fa7b"
-yellow = "#f1fa8c"
-blue = "#bd93f9"
-magenta = "#ff79c6"
-cyan = "#8be9fd"
-white = "#f8f8f2"
-
-[colors.bright]
-
-black = "#6272a4"
-red = "#ff6e6e"
-green = "#69ff94"
-yellow = "#ffffa5"
-blue = "#d6acff"
-magenta = "#ff92df"
-cyan = "#a4ffff"
-white = "#ffffff"
-
-[colors.search.matches]
-
-foreground = "#44475a"
-background = "#50fa7b"
-
-[colors.search.focused_match]
-
-foreground = "#44475a"
-background = "#ffb86c"
-
-[colors.footer_bar]
-
-background = "#282a36"
-foreground = "#f8f8f2"
-
-[colors.hints.start]
-
-foreground = "#282a36"
-background = "#f1fa8c"
-
-[colors.hints.end]
-
-foreground = "#f1fa8c"
-background = "#282a36"
+[window]
+opacity = 0.85

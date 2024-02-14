@@ -18,6 +18,8 @@ hades() {
 # helper to setup hades config
 zeus() {
 
+    common::udisks2
+
     # ip link set wlan0 up
     # install-fonts
     common.install.fonts

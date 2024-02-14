@@ -20,8 +20,8 @@ print-workspaces() {
                 class="workspace"
             fi
 
-            if [[ "$workspace" = *"["* ]]; then
-                class="$class round-left square-right"
+            if [[ "$workspace" = *"["* ]] && [[ "$workspace" = *"]"* ]]; then
+                class="$class round"
             elif [[ "$workspace" = *"["* ]]; then
                 class="$class round-left square-right"
             elif [[ "$workspace" = *"]"* ]]; then
@@ -33,6 +33,10 @@ print-workspaces() {
         done
 
         echo "(box :space-evenly false :class \"workspaces\" $output)"
+        
+
+
+        # echo "(box :space-evenly false :class \"workspaces\" $output)"
     )
 }
 
@@ -44,14 +48,15 @@ print-workspaces() {
 ########################################
 watch-workspaces() {
 
-    # 
-    while true; do
-        pkill xprop
-        xprop -root -spy _NET_CURRENT_DESKTOP | while read -r _ ; do
-            print-workspaces
-        done &
-        sleep 10
-    done
+    echo "." > /tmp/workspaces
+
+    # while true; do
+    #     pkill xprop
+    #     xprop -root -spy _NET_DESKTOP_NAMES _NET_CURRENT_DESKTOP | while read -r _ ; do
+    #         print-workspaces
+    #     done &
+    #     sleep 5
+    # done
 }
 
 "$@"
