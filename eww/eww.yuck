@@ -70,9 +70,9 @@
     (box
       :space-evenly false
       :class "audio round-left square-right"
-      (box
+      (label
         :class "icon"
-        "${audio-output-icon}"
+        :text "${audio-output-icon}"
       )
       {audio-output-volume == "mute" ? " " : "${audio-output-volume}%"}
     )
@@ -94,9 +94,9 @@
     (box
       :space-evenly false
       :class "audio square-left round-right"
-      (box
+      (label
         :class "icon"
-        "${audio-input-icon}"
+        :text "${audio-input-icon}"
       )
       {audio-input-volume == "mute" ? " " : "${audio-input-volume}%"}
     )

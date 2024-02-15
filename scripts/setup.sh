@@ -7,18 +7,22 @@ source $(dirname "$0")/common.sh
 # helper to setup hades config
 hades() {
 
-    # shared configs
-    symlink-common
+     # common symlinks
+    common.symlink.home
+
+
+    # install-fonts
+    common.install.fonts
+
+
 
     # i3
-    symlink hades/i3/custom ~/.config/i3/custom
-    symlink hades/i3/scripts ~/.config/i3/scripts
+    common.symlink i3/custom ~/.config/i3/custom
+    common.symlink i3/scripts ~/.config/i3/scripts
 }
 
 # helper to setup hades config
 zeus() {
-
-    common::udisks2
 
     # ip link set wlan0 up
     # install-fonts

@@ -51,13 +51,20 @@ common.install.fonts() {
 
     echo -e "\n:: starting common fonts"
 
-    sudo mkdir -p /usr/share/fonts/common
-    sudo cp -r fonts/* /usr/share/fonts/common
-    sudo chown -R root:root /usr/share/fonts/common
-    sudo fc-cache -f -v >> /dev/null
+    # verify if has changes in fonts
+    if [[ $(diff -qr fonts/ /usr/share/fonts/common/ | grep -v uuid) ]] ; then
+        sudo rm -rf /usr/share/fonts/common
+        sudo mkdir -p /usr/share/fonts/common
+        sudo cp -r fonts/* /usr/share/fonts/common
+        sudo chown -R root:root /usr/share/fonts/common
+        sudo fc-cache -f -v >> /dev/null
+        echo "fonts successfully installed at: [/usr/share/fonts/common]"
+        
+    else
+        echo "fonts already installed at: [/usr/share/fonts/common]"
+    fi
 
     echo -e ":: finished common fonts\n"
-
 }
 
 
@@ -74,6 +81,7 @@ common.symlink.home() {
     common.symlink i3/config ~/.config/i3/config
     common.symlink picom/picom.conf ~/.config/picom/picom.conf
     common.symlink alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
+    common.symlink kitty/kitty.conf ~/.config/kitty/kitty.conf
     common.symlink eww ~/.config/eww
     common.symlink wallpapers ~/.config/wallpapers
     common.symlink dunst/dunstrc ~/.config/dunst/dunstrc
@@ -115,7 +123,7 @@ common::udisks2() {
     echo -e "\n:: starting udisks2 config"
 
     common::copy_to_root udisks2/99-udisks2.rules /etc/udev/rules.d/99-udisks2.rules
-    common::copy_to_root udisks2/media.conf /etc/tmpfiles.d/media.conf
+    #common::copy_to_root udisks2/media.conf /etc/tmpfiles.d/media.conf
 
     echo -e ":: finished udisks2 configs\n"
 }
