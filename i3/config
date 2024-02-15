@@ -7,9 +7,7 @@ set $secondary_display eDP-1
 include ~/.config/i3/custom
 
 # programs
-#exec --no-startup-id udiskie
-exec --no-startup-id picom --daemon --config ~/.config/picom/picom.conf 
-exec_always --no-startup-id feh --bg-fill $(shuf -e -n1 ~/.config/wallpapers/*)
+exec_always --no-startup-id ~/.config/i3/scripts i3::start
 
 # font
 font pango:Droid Sans Mono, 8
@@ -148,7 +146,3 @@ bindsym $mod+x mode "[l]ogout, [r]eboot, [s]hutdown, loc[k]"
 
 # gaps
 gaps inner 5
-
-bar {
- #   status_command polybar
-}

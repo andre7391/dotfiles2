@@ -7,37 +7,43 @@
 #   None
 ########################################
 print-workspaces() {
-    i3-msg -t get_workspaces | sed -E 's/\},\s*\{/\},\n\{/g' | ( 
-        while read workspace ; do
+
+    last=$(</tmp/workspaces)
+    current=$(i3-msg -t get_workspaces)
+
+    # only print workspaces when it has changed
+    if [ $last != $current ] ; then 
         
-            name=$(echo $workspace | cut -d ':' -f 4 | cut -d ',' -f 1 | tr -d '"')
+        echo $current > /tmp/workspaces
+
+        echo $current | sed -E 's/\},\s*\{/\},\n\{/g' | ( 
+            while read workspace ; do
             
-            if [[ "$workspace" = *"focused\":true"* ]]; then
-                class="workspace focused"   
-            elif [[ "$workspace" = *"urgent\":true"* ]]; then
-                class="workspace urgent"
-            else 
-                class="workspace"
-            fi
+                name=$(echo $workspace | cut -d ':' -f 4 | cut -d ',' -f 1 | tr -d '"')
+                
+                if [[ "$workspace" = *"focused\":true"* ]]; then
+                    class="workspace focused"   
+                elif [[ "$workspace" = *"urgent\":true"* ]]; then
+                    class="workspace urgent"
+                else 
+                    class="workspace"
+                fi
 
-            if [[ "$workspace" = *"["* ]] && [[ "$workspace" = *"]"* ]]; then
-                class="$class round"
-            elif [[ "$workspace" = *"["* ]]; then
-                class="$class round-left square-right"
-            elif [[ "$workspace" = *"]"* ]]; then
-                class="$class square-left round-right"
-            else 
-                class="$class square"
-            fi
-            output="$output (eventbox :cursor \"hand\" :onclick \"i3-msg workspace $name\" (label :class \"$class\" :text \"$name\"))"
-        done
+                if [[ "$workspace" = *"["* ]] && [[ "$workspace" = *"]"* ]]; then
+                    class="$class round"
+                elif [[ "$workspace" = *"["* ]]; then
+                    class="$class round-left square-right"
+                elif [[ "$workspace" = *"]"* ]]; then
+                    class="$class square-left round-right"
+                else 
+                    class="$class square"
+                fi
+                output="$output (eventbox :cursor \"hand\" :onclick \"i3-msg workspace $name\" (label :class \"$class\" :text \"$name\"))"
+            done
 
-        echo "(box :space-evenly false :class \"workspaces\" $output)"
-        
-
-
-        # echo "(box :space-evenly false :class \"workspaces\" $output)"
-    )
+            echo "(box :space-evenly false :class \"workspaces\" $output)"
+        )
+    fi
 }
 
 ########################################
@@ -48,15 +54,21 @@ print-workspaces() {
 ########################################
 watch-workspaces() {
 
-    echo "." > /tmp/workspaces
+    # trap to kill all child process
+    trap 'kill $(jobs -p)' EXIT
 
-    # while true; do
-    #     pkill xprop
-    #     xprop -root -spy _NET_DESKTOP_NAMES _NET_CURRENT_DESKTOP | while read -r _ ; do
-    #         print-workspaces
-    #     done &
-    #     sleep 5
-    # done
+    echo '.' > /tmp/workspaces
+
+    # watch workspaces changes
+    xprop -root -spy _NET_DESKTOP_NAMES _NET_CURRENT_DESKTOP | while read -r _ ; do
+        print-workspaces
+    done &
+
+    # check for changes every 5 seconds
+    while true; do
+        sleep 5
+        print-workspaces
+    done
 }
 
 "$@"

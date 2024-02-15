@@ -79,6 +79,7 @@ common.symlink.home() {
     echo -e "\n:: starting symlink home"
 
     common.symlink i3/config ~/.config/i3/config
+    common.symlink i3/scripts ~/.config/i3/scripts
     common.symlink picom/picom.conf ~/.config/picom/picom.conf
     common.symlink alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
     common.symlink kitty/kitty.conf ~/.config/kitty/kitty.conf
