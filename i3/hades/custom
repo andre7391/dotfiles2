@@ -1,5 +1,5 @@
 
 # refresh display
-bindsym $mod+p exec --no-startup-id ~/.config/i3/scripts refresh_display
+bindsym $mod+p exec --no-startup-id ~/.config/i3/scripts_custom refresh_display
 
-exec --no-startup-id ~/.config/i3/scripts config_display
+exec --no-startup-id ~/.config/i3/scripts_custom config_display

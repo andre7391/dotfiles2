@@ -88,6 +88,7 @@ common.symlink.home() {
     common.symlink dunst/dunstrc ~/.config/dunst/dunstrc
     common.symlink xinit/.xinitrc ~/.xinitrc
     common.symlink flavours ~/.config/flavours
+    common.symlink config/.profile ~/.profile
 
 
     common.symlink themes ~/.themes

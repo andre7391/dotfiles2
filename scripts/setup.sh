@@ -17,8 +17,8 @@ hades() {
 
 
     # i3
-    common.symlink i3/custom ~/.config/i3/custom
-    common.symlink i3/scripts ~/.config/i3/scripts
+    common.symlink i3/hades/custom ~/.config/i3/custom
+    common.symlink i3/hades/scripts_custom ~/.config/i3/scripts_custom
 }
 
 # helper to setup hades config
