@@ -12,9 +12,9 @@ print-workspaces() {
     current=$(i3-msg -t get_workspaces)
 
     # only print workspaces when it has changed
-    if [ $last != $current ] ; then 
+    if [[ $last != $current ]] ; then 
         
-        echo $current > /tmp/workspaces
+        printf "%s" "$current" > /tmp/workspaces
 
         echo $current | sed -E 's/\},\s*\{/\},\n\{/g' | ( 
             while read workspace ; do

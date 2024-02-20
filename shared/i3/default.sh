@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source ~/.profile
-
 ########################################
 # Run eww
 #
@@ -10,7 +8,7 @@ source ~/.profile
 ########################################
 i3::eww() {
     
-    eww kill
+    pkill eww
     eww daemon &> /dev/null
     eww open bar-window &> /dev/null
 }
@@ -50,7 +48,6 @@ i3::start() {
     i3::eww &
     i3::picom &
     i3::feh &
-
 }
 
 "$@"

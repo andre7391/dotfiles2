@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ########################################
-# Description:
-#   Function to configure display using xrandr
+# Function to configure display using xrandr
+#
 # Arguments:
 #   None
 ########################################
-config-display() {
+i3::configure_display() {
     current=$(xrandr --current)
 
     xrandr --auto

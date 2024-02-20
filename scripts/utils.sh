@@ -7,7 +7,7 @@
 # Arguments:
 #   $1 - Command to execute the program / app
 ########################################
-common.installed() {
+utils::is_installed() {
     [ -x "$(command -v $1)" ]    
 }
 
@@ -20,12 +20,7 @@ common.installed() {
 #   $1 - File or folder to be symlinked
 #   $2 - Destiny where the synlink will be created
 ########################################
-common.symlink() {
-
-    # check if file/folder already exists to make a backup
-    if ([ -f $2 ] || [ -d $2 ]) && ! [ -L $2 ]; then
-        mv $2 "$1-backup"
-    fi
+utils::symlink() {
 
     # create destiny folder
     if ! [ -e $2 ] && ! [ -L $2 ]; then
@@ -38,6 +33,33 @@ common.symlink() {
     
     echo "symlink created from: [$1] to [$2]"
 }
+
+########################################
+# Copy a file to a root owned folder and change file ownership
+#
+# Arguments:
+#   $1 - File or folder to be symlinked
+#   $2 - Destiny where the synlink will be created
+########################################
+utils::copy_to_root() {
+    
+    # udisks2 config
+    if ! [ -f $2 ] && ! [ -d $2 ] ; then
+        sudo cp -r $1 $2
+        sudo chown -R root:root $2
+        echo "file copied from: [$1] to [$2]"
+    else
+        echo "file already exists: [$2]"
+    fi
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -78,39 +100,41 @@ common.symlink.home() {
 
     echo -e "\n:: starting symlink home"
 
-    common.symlink i3/config ~/.config/i3/config
-    common.symlink i3/scripts ~/.config/i3/scripts
-    common.symlink picom/picom.conf ~/.config/picom/picom.conf
-    common.symlink alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
-    common.symlink kitty/kitty.conf ~/.config/kitty/kitty.conf
-    common.symlink eww ~/.config/eww
-    common.symlink wallpapers ~/.config/wallpapers
-    common.symlink dunst/dunstrc ~/.config/dunst/dunstrc
-    common.symlink xinit/.xinitrc ~/.xinitrc
-    common.symlink flavours ~/.config/flavours
+    # i3wm
+    common.symlink shared/i3/default.conf ~/.config/i3/config
+    common.symlink shared/i3/default.conf ~/.config/i3/default.conf
+    common.symlink shared/i3/default.sh ~/.config/i3//default.sh
+
+    # picom
+    common.symlink shared/picom/default.conf ~/.config/picom/picom.conf
+
+    # kitty
+    common.symlink shared/kitty/default.conf ~/.config/kitty/kitty.conf
+
+    # eww
+    common.symlink shared/eww ~/.config/eww
+
+
+    common.symlink shared/wallpapers ~/.config/wallpapers
+    
+    # xinit
+    common.symlink shared/xinit/.xinitrc ~/.xinitrc
+
+    common.symlink shared/flavours ~/.config/flavours
+    
     common.symlink config/.profile ~/.profile
 
 
-    common.symlink themes ~/.themes
-    common.symlink themes/gtk2 ~/.gtkrc-2.0
-    common.symlink themes/gtk3 ~/.config/gtk-3.0/settings.ini
-    common.symlink themes/xsettings ~/.config/xsettingsd/xsettingsd.conf
+    common.symlink shared/themes ~/.themes
+    common.symlink shared/themes/gtk2 ~/.gtkrc-2.0
+    common.symlink shared/themes/gtk3 ~/.config/gtk-3.0/settings.ini
+    common.symlink shared/themes/xsettings ~/.config/xsettingsd/xsettingsd.conf
 
     echo -e ":: finished common symlinks\n"
 
 }
 
-common::copy_to_root() {
-    
-    # udisks2 config
-    if ! [ -f $2 ] && ! [ -d $2 ] ; then
-        sudo cp -r $1 $2
-        sudo chown -R root:root $2
-        echo "file copied from: [$1] to [$2]"
-    else
-        echo "file already exists: [$2]"
-    fi
-}
+
 
 
 

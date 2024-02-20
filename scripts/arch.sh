@@ -1,10 +1,7 @@
 #!/bin/bash
 
-
 # imports
-source $(dirname "$0")/common.sh
-
-
+source $(dirname ${BASH_SOURCE})/utils.sh
 
 ########################################
 # Install package using yay package manager in arch
@@ -13,10 +10,10 @@ source $(dirname "$0")/common.sh
 #   $1 - Command to execute the program / app
 #   $2 - Package name at arch/aur repository
 ########################################
-arch.install () {
+arch::install () {
 
     # check if its already installed
-    if ! common.installed $1 ; then
+    if ! utils::is_installed $1 ; then
 
         # install the package
         if ! [ -z "$2" ]; then 
@@ -31,15 +28,13 @@ arch.install () {
     fi
 }
 
-
-
 ########################################
 # Install package eww in arch
 #
 # Arguments:
 #   None
 ########################################
-arch.install.eww () {
+arch::install_eww () {
 
 
     # if ! installed eww ; then
@@ -54,7 +49,7 @@ arch.install.eww () {
 
 
     # check if eww is installed
-    if ! common.installed eww ; then
+    if ! utils::is_installed eww ; then
 
         # install dependencies
         yay -S --needed --noconfirm gtk3 pango gdk-pixbuf2 cairo glib2 gcc-libs glibc > /dev/null
@@ -78,34 +73,4 @@ arch.install.eww () {
     else
         echo "already installed: [eww]"
     fi
-}
-
-
-
-########################################
-# Function to install all common packages used in arch
-#
-# Arguments:
-#   None
-########################################
-arch.install.packages() {
-
-    echo -e "\n:: starting common packages arch"
-
-    # install arch packages
-    arch.install xrandr xorg-xrandr
-    arch.install picom
-    arch.install dmenu
-    arch.install dunst
-    arch.install nitrogen
-    arch.install alacritty
-    arch.install thunar
-    arch.install rofi
-    arch.install feh
-    arch.install unzip
-
-    # isntall eww
-    arch.install.eww
-
-    echo -e ":: finished common packages arch\n"
 }
