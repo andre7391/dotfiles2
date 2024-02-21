@@ -57,7 +57,14 @@ shared::symlink_home() {
     utils::symlink shared/kitty/default.conf ~/.config/kitty/kitty.conf
 
     # eww
-    utils::symlink shared/eww ~/.config/eww
+    utils::symlink shared/eww/default.yuck ~/.config/eww/eww.yuck
+    utils::symlink shared/eww/default.scss ~/.config/eww/eww.scss
+    utils::symlink shared/eww/default.yuck ~/.config/eww/default.yuck
+    utils::symlink shared/eww/default.scss ~/.config/eww/default.scss
+    utils::symlink shared/eww/scripts ~/.config/eww/scripts
+
+
+
 
 
     utils::symlink shared/wallpapers ~/.config/wallpapers

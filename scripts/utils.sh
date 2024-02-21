@@ -8,7 +8,7 @@
 #   $1 - Command to execute the program / app
 ########################################
 utils::is_installed() {
-    [ -x "$(command -v $1)" ]    
+    [[ -x "$(command -v $1)" ]]
 }
 
 
@@ -21,6 +21,12 @@ utils::is_installed() {
 #   $2 - Destiny where the synlink will be created
 ########################################
 utils::symlink() {
+
+    # stop if source file / folder doesnt exists
+    if ! [[ -f $1 ]] && ! [[ -d $1 ]] ; then
+        echo "source file / folder doesnt exists [$1]"
+        return 0
+    fi
 
     # create destiny folder
     if ! [ -e $2 ] && ! [ -L $2 ]; then
@@ -44,7 +50,7 @@ utils::symlink() {
 utils::copy_to_root() {
     
     # udisks2 config
-    if ! [ -f $2 ] && ! [ -d $2 ] ; then
+    if ! [[ -f $2 ]] && ! [[ -d $2 ]] ; then
         sudo cp -r $1 $2
         sudo chown -R root:root $2
         echo "file copied from: [$1] to [$2]"

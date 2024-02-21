@@ -1,36 +1,3 @@
-;;(include "./path/to/your/file.yuck")
-;; bar-window
-(defwindow bar-window
-  :monitor 0
-  :exclusive true
-  :wm-ignore false
-  :geometry (geometry
-    :width "100%"
-    :anchor "center top"
-  )
-  (bar)
-)
-
-;; bar
-(defwidget bar []
-  (box
-    :class "bar"
-    (start)
-    (end)
-  )
-)
-
-;; end
-(defwidget end []
-  (box
-    :halign "end"
-    :space-evenly false
-    (wifi)
-    (audio)
-    (date)
-    
-  )
-)
 
 ;; date
 (defwidget date []
@@ -131,19 +98,6 @@
   "scripts/wifi text"
 )
 
-
-;; start
-(defwidget start []
-  (box
-    :halign "start"
-    :space-evenly false
-    (performance)
-    (workspaces)
-    ;;(control)
-    ;;(separator)
-  )
-)
-
 ;; workspaces
 (defwidget workspaces []
   (literal
@@ -154,22 +108,7 @@
   "scripts/workspace watch-workspaces"
 )
 
-;; performance
-(defwidget performance []
-  (eventbox
-    :cursor "pointer"
-    (box
-      :space-evenly false
-      (nix)
-      (cpu_usage)
-      (cpu_temperature)
-      (memory_usage)
-      (disk_usage)
-      (network_usage)
-    )
-  )
-)
-
+;; memory usage
 (defwidget memory_usage []
   (box
     :space-evenly false
@@ -182,6 +121,7 @@
   )
 )
 
+;; cpu usage
 (defwidget cpu_usage []
   (box
     :space-evenly false
@@ -194,7 +134,8 @@
   )
 )
 
-(defwidget cpu_temperature []
+;; cpu temperature
+(defwidget cpu_temperature [param]
   (box
     :space-evenly false
     :class "performance square"
@@ -202,14 +143,12 @@
       :class "icon"
       :text " "
     )
-    "${round(EWW_TEMPS[param_cpu_temperature], 0)}°C"
+    "${round(EWW_TEMPS[param], 0)}°C"
   )
   
 )
-(defvar param_cpu_temperature
-  "CORETEMP_PACKAGE_ID_0"
-)
 
+;; disk usage
 (defwidget disk_usage []
   (box
     :space-evenly false
@@ -222,7 +161,8 @@
   )
 )
 
-(defwidget network_usage []
+;; network usage
+(defwidget network_usage [param]
   (box
     :space-evenly false
     :class "performance square-left round-right"
@@ -230,12 +170,10 @@
       :class "icon"
       :text " "
     )
-    "${round(EWW_NET[param_network_interface].NET_DOWN/260000, 1)}M"
+    "${round(EWW_NET[param].NET_DOWN/260000 + EWW_NET[param].NET_UP/260000, 1)}M"
   )
 )
-(defvar param_network_interface
-  "wlp2s0"
-)
+
 
 (defwidget nix []
   (box

@@ -48,6 +48,11 @@ zeus::symlink() {
     utils::symlink zeus/i3/custom.conf ~/.config/i3/custom.conf
     utils::symlink zeus/i3/custom.sh ~/.config/i3/custom.sh
 
+
+    # eww
+    utils::symlink zeus/eww/custom.yuck ~/.config/eww/eww.yuck
+    utils::symlink zeus/eww/custom.yuck ~/.config/eww/custom.yuck
+
     echo -e ":: finished zeus symlinks\n"
 
 }
@@ -75,6 +80,12 @@ hades() {
     common.symlink hades/i3/custom.conf ~/.config/i3/config
     common.symlink hades/i3/custom.conf ~/.config/i3/custom.conf
     common.symlink hades/i3/custom.sh ~/.config/i3/custom.sh
+
+    # eww
+    common.symlink hades/i3/custom.conf ~/.config/i3/config
+    common.symlink hades/i3/custom.conf ~/.config/i3/custom.conf
+    common.symlink hades/i3/custom.sh ~/.config/i3/custom.sh
+
 }
 
 ########################################
@@ -86,6 +97,7 @@ hades() {
 zeus::install() {
 
     # ip link set wlan0 up
+    # sudo ip link set wlan0 state UP mode DEFAULT
     
     # install-fonts
     shared::symlink_fonts
