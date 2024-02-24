@@ -99,8 +99,8 @@ zeus::install() {
     # ip link set wlan0 up
     # sudo ip link set wlan0 state UP mode DEFAULT
     
-    # install-fonts
-    shared::symlink_fonts
+    # appearance
+    shared::appearance
 
     # shared packages
     zeus::install_packages

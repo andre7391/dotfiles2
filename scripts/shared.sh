@@ -3,39 +3,6 @@
 source $(dirname ${BASH_SOURCE})/utils.sh
 
 ########################################
-# Function to install fonts at user home
-#
-# Arguments:
-#   None
-########################################
-shared::symlink_fonts() {
-
-    echo -e "\n:: starting shared fonts"
-
-    mkdir -p ~/.local/share/fonts/shared
-    new=$(find ~/.local/share/fonts/shared | sort | md5sum)
-
-    touch ~/.local/share/fonts/md5sum
-    old=$(<~/.local/share/fonts/md5sum)
-
-    # compare md5sum to check if the fonts changed
-    if [[ $old != $new ]] ; then 
-        
-        sudo rm -rf /usr/share/fonts/common
-        utils::symlink shared/fonts ~/.local/share/fonts/shared
-        sudo fc-cache -f -v >> /dev/null
-        printf "%s" "$new" > ~/.local/share/fonts/md5sum
-
-        echo "fonts successfully installed at: [$HOME/.local/share/fonts]"
-        
-    else
-        echo "fonts already installed at: [$HOME/.local/share/fonts]"
-    fi
-
-    echo -e ":: finished common fonts\n"
-}
-
-########################################
 # Function to symlink all shared configs at user home
 #
 # Arguments:
@@ -44,6 +11,13 @@ shared::symlink_fonts() {
 shared::symlink_home() {
 
     echo -e "\n:: starting symlink home"
+
+    # bspwm
+    utils::symlink shared/bspwm/default-bspwm.rc ~/.config/bspwm/bspwmrc
+    utils::symlink shared/bspwm/default-bspwm.rc ~/.config/bspwm/default-bspwm.rc
+    utils::symlink shared/bspwm/default-sxhkd.rc ~/.config/bspwm/sxhkdrc
+    utils::symlink shared/bspwm/default-sxhkd.rc ~/.config/bspwm/default-sxhkd.rc
+    utils::symlink shared/bspwm/default.sh ~/.config/bspwm/default.sh
 
     # i3wm
     utils::symlink shared/i3/default.conf ~/.config/i3/config
@@ -63,27 +37,61 @@ shared::symlink_home() {
     utils::symlink shared/eww/default.scss ~/.config/eww/default.scss
     utils::symlink shared/eww/scripts ~/.config/eww/scripts
 
-
-
-
-
-    utils::symlink shared/wallpapers ~/.config/wallpapers
-    
     # xinit
     utils::symlink shared/xinit/.xinitrc ~/.xinitrc
 
-    utils::symlink shared/flavours ~/.config/flavours
-    
-    utils::symlink config/.profile ~/.profile
+    # utils::symlink config/.profile ~/.profile
 
 
-    utils::symlink shared/themes ~/.themes
-    utils::symlink shared/themes/gtk2 ~/.gtkrc-2.0
-    utils::symlink shared/themes/gtk3 ~/.config/gtk-3.0/settings.ini
-    utils::symlink shared/themes/xsettings ~/.config/xsettingsd/xsettingsd.conf
+
 
     echo -e ":: finished common symlinks\n"
 
+}
+
+########################################
+# Function to install fonts at user home
+#
+# Arguments:
+#   None
+########################################
+shared::appearance_fonts() {
+  
+    echo -e "\n:: starting shared fonts"
+
+    mkdir -p ~/.local/share/fonts/shared
+
+    # verify if has changes in fonts
+    if [[ $(diff -qr shared/appearance/fonts ~/.local/share/fonts/shared | grep -v uuid) ]] ; then
+
+        cp -r shared/appearance/fonts/* ~/.local/share/fonts/shared 
+        sudo fc-cache -f -v >> /dev/null
+        echo "fonts successfully installed at: [$HOME/.local/share/fonts]"
+        
+    else
+        echo "fonts already installed at: [$HOME/.local/share/fonts]"
+    fi
+
+    echo -e ":: finished shared fonts\n"
+    
+}
+
+shared::appearance() {
+
+    # flavous
+    utils::symlink shared/appearance/flavours ~/.config/flavours
+
+    # wallpapers
+    utils::symlink shared/appearance/wallpapers ~/.config/wallpapers
+
+    # gtk
+    utils::symlink shared/appearance/gtk ~/.themes
+    utils::symlink shared/appearance/gtk/gtk2 ~/.gtkrc-2.0
+    utils::symlink shared/appearance/gtk/gtk3 ~/.config/gtk-3.0/settings.ini
+    utils::symlink shared/appearance/gtk/xsettings ~/.config/xsettingsd/xsettingsd.conf
+
+    # fonts
+    shared::appearance_fonts
 }
 
 ########################################

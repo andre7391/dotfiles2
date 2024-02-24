@@ -28,8 +28,16 @@ utils::symlink() {
         return 0
     fi
 
+    # if  [[ -d $1 ]] ; then
+    #     find $1 -type f | xargs -L 1 -I file utils::symlink "aa bfile"
+    #     files=$(find $1 -type f )
+    #     # for i in $(find . -name \*.txt); do 
+    #     #     process "$i"
+    #     # done
+    # fi
+
     # create destiny folder
-    if ! [ -e $2 ] && ! [ -L $2 ]; then
+    if ! [ -e $2 ]; then
         mkdir -p $2
     fi
 
@@ -44,7 +52,7 @@ utils::symlink() {
 # Copy a file to a root owned folder and change file ownership
 #
 # Arguments:
-#   $1 - File or folder to be symlinked
+#   $1 - File or folder to be symlinked``
 #   $2 - Destiny where the synlink will be created
 ########################################
 utils::copy_to_root() {

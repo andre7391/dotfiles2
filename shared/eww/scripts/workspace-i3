@@ -1,0 +1,74 @@
+#!/bin/bash
+
+########################################
+# Function to print workspaces tags to be used in eww
+#
+# Arguments:
+#   None
+########################################
+print-workspaces() {
+
+    last=$(</tmp/workspaces)
+    current=$(i3-msg -t get_workspaces)
+
+    # only print workspaces when it has changed
+    if [[ $last != $current ]] ; then 
+        
+        printf "%s" "$current" > /tmp/workspaces
+
+        echo $current | sed -E 's/\},\s*\{/\},\n\{/g' | ( 
+            while read workspace ; do
+            
+                name=$(echo $workspace | cut -d ':' -f 4 | cut -d ',' -f 1 | tr -d '"')
+                
+                if [[ "$workspace" = *"focused\":true"* ]]; then
+                    class="workspace focused"   
+                elif [[ "$workspace" = *"urgent\":true"* ]]; then
+                    class="workspace urgent"
+                else 
+                    class="workspace"
+                fi
+
+                if [[ "$workspace" = *"["* ]] && [[ "$workspace" = *"]"* ]]; then
+                    class="$class round"
+                elif [[ "$workspace" = *"["* ]]; then
+                    class="$class round-left square-right"
+                elif [[ "$workspace" = *"]"* ]]; then
+                    class="$class square-left round-right"
+                else 
+                    class="$class square"
+                fi
+                output="$output (eventbox :cursor \"hand\" :onclick \"i3-msg workspace $name\" (label :class \"$class\" :text \"$name\"))"
+            done
+
+            echo "(box :space-evenly false :class \"workspaces\" $output)"
+        )
+    fi
+}
+
+########################################
+# Print workspaces tags when something has changed
+#
+# Arguments:
+#   None
+########################################
+watch-workspaces() {
+
+    # trap to kill all child process
+    trap 'kill $(jobs -p)' EXIT
+
+    echo '.' > /tmp/workspaces
+
+    # watch workspaces changes
+    xprop -root -spy _NET_DESKTOP_NAMES _NET_CURRENT_DESKTOP | while read -r _ ; do
+        print-workspaces
+    done &
+
+    # check for changes every 5 seconds
+    while true; do
+        sleep 5
+        print-workspaces
+    done
+}
+
+"$@"
