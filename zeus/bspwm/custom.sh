@@ -6,7 +6,7 @@
 # Arguments:
 #   None
 ########################################
-i3::configure_display() {
+bspwm::configure_display() {
     current=$(xrandr --current)
 
     xrandr --auto

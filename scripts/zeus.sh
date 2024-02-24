@@ -43,11 +43,10 @@ zeus::symlink() {
 
     echo -e "\n:: starting zeus symlinks"
 
-    # i3
-    utils::symlink zeus/i3/custom.conf ~/.config/i3/config
-    utils::symlink zeus/i3/custom.conf ~/.config/i3/custom.conf
-    utils::symlink zeus/i3/custom.sh ~/.config/i3/custom.sh
-
+    # bspwm
+    utils::symlink zeus/bspwm/custom-bspwm.rc ~/.config/bspwm/bspwmrc
+    utils::symlink zeus/bspwm/custom-bspwm.rc ~/.config/bspwm/custom-bspwm.rc
+    utils::symlink zeus/bspwm/custom.sh ~/.config/bspwm/custom.sh
 
     # eww
     utils::symlink zeus/eww/custom.yuck ~/.config/eww/eww.yuck
