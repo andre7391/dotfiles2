@@ -15,7 +15,6 @@ shared::symlink_home() {
     # bspwm
     utils::symlink shared/bspwm/default-bspwm.rc ~/.config/bspwm/bspwmrc
     utils::symlink shared/bspwm/default-bspwm.rc ~/.config/bspwm/default-bspwm.rc
-    utils::symlink shared/bspwm/default-sxhkd.rc ~/.config/bspwm/sxhkdrc
     utils::symlink shared/bspwm/default-sxhkd.rc ~/.config/bspwm/default-sxhkd.rc
     utils::symlink shared/bspwm/default.sh ~/.config/bspwm/default.sh
 

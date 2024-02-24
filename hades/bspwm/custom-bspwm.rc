@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# source default config
+source ~/.config/bspwm/default-bspwm.rc
+
+# configure display
+~/.config/bspwm/custom.sh bspwm::start

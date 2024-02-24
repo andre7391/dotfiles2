@@ -48,6 +48,11 @@ hades::symlink() {
     utils::symlink hades/i3/custom.conf ~/.config/i3/custom.conf
     utils::symlink hades/i3/custom.sh ~/.config/i3/custom.sh
 
+    # bspwm
+    utils::symlink hades/bspwm/custom-bspwm.rc ~/.config/bspwm/bspwmrc
+    utils::symlink hades/bspwm/custom-bspwm.rc ~/.config/bspwm/custom-bspwm.rc
+    utils::symlink hades/bspwm/custom-sxhkd.rc ~/.config/bspwm/custom-sxhkd.rc
+    utils::symlink hades/bspwm/custom.sh ~/.config/bspwm/custom.sh
 
     # eww
     utils::symlink hades/eww/custom.yuck ~/.config/eww/eww.yuck
@@ -99,8 +104,8 @@ hades::install() {
     # ip link set wlan0 up
     # sudo ip link set wlan0 state UP mode DEFAULT
     
-    # install-fonts
-    shared::symlink_fonts
+    # appearance
+    shared::appearance
 
     # shared packages
     # zeus::install_packages

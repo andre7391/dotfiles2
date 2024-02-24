@@ -1,10 +1,6 @@
 #!/bin/bash
 
-# workspaces
-bspc monitor -d 1 2 3 4 5 6 7 8 9 S
-
 # configs
-bspc config top_padding             22
 bspc config border_width            1
 bspc config window_gap              12
 bspc config split_ratio             0.52

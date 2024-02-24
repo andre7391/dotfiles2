@@ -4,7 +4,7 @@
 
 ;; bar-window
 (defwindow bar-window
-  :monitor 0
+  :monitor "<primary>"
   :exclusive true
   :wm-ignore false
   :geometry (geometry

@@ -1,6 +1,28 @@
 #!/bin/bash
 
 ########################################
+# Create bspwm workspaces only when necessary
+#
+# Arguments:
+#   None
+########################################
+bspwm::create_workspaces() {
+
+    # workspaces
+    workspaces=(1 2 3 4 5 6 7 8 9 S PI PE)
+
+    # current workspaces
+    current_workspaces=($(bspc query -D --names))
+    for workspace in ${workspaces[@]} ; do
+        if [[ ! ${current_workspaces[@]} =~ $workspace ]] ; then
+            bspc monitor -d ${workspaces[@]}
+            return 0
+        fi
+    done
+}
+
+
+########################################
 # Run eww
 #
 # Arguments:
@@ -42,7 +64,7 @@ bspwm::feh() {
 ######################################## 
 bspwm::sxhkd() {
     pkill sxhkd
-    sxhkd -c ~/.config/bspwm/sxhkdrc
+    sxhkd -c ~/.config/bspwm/default-sxhkd.rc
 }
 
 ########################################
@@ -52,6 +74,7 @@ bspwm::sxhkd() {
 #   None
 ########################################
 bspwm::start() {
+    bspwm::create_workspaces &
     bspwm::sxhkd &
     bspwm::eww &
     bspwm::picom &
