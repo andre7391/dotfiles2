@@ -29,6 +29,9 @@ shared::symlink_home() {
     # kitty
     utils::symlink shared/kitty/default.conf ~/.config/kitty/kitty.conf
 
+    # alacritty
+    utils::symlink shared/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
+
     # eww
     utils::symlink shared/eww/default.yuck ~/.config/eww/eww.yuck
     utils::symlink shared/eww/default.scss ~/.config/eww/eww.scss

@@ -1,10 +1,8 @@
-#
-# wm independent hotkeys
-#
+#!/bin/bash
 
 # open terminal
 super + q
-	kitty
+	alacritty
 
 # kill focused window
 super + c

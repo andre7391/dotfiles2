@@ -21,7 +21,6 @@
 @define-color base_color mix(@color0, @color15, 0);
 @define-color fg_color @color15;
 @define-color text_color @color15;
-@define-color text_color_disabled mix(@text_color, @base_color, 0.4);
 @define-color selected_fg_color @color15;
 @define-color tooltip_fg_color @color15;
 
@@ -36,7 +35,8 @@
 @define-color theme_tooltip_fg_color @tooltip_fg_color;
 
 /* shadow effects */
-@define-color shadow alpha(@theme_fg_color, 0.1);
+@define-color light_shadow #eeeeee;
+@define-color dark_shadow #222222;
 
 /* misc colors used by gtk+ */
 @define-color info_fg_color @text_color;

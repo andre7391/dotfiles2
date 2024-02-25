@@ -53,7 +53,8 @@ bspwm::picom() {
 #   None
 ######################################## 
 bspwm::feh() {
-    feh --bg-fill $(shuf -e -n1 ~/.config/wallpapers/*)
+    wal -steq --iterative -i ~/.config/wallpapers
+#    feh --bg-fill $(shuf -e -n1 ~/.config/wallpapers/*)
 }
 
 ########################################

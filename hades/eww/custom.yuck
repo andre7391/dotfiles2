@@ -5,7 +5,8 @@
 ;; bar-window
 (defwindow bar-window
   :monitor "<primary>"
-  :exclusive true
+  :stacking "fg"
+  :windowtype "dock"
   :wm-ignore false
   :geometry (geometry
     :width "100%"

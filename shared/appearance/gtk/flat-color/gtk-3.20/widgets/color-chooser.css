@@ -59,7 +59,7 @@ GtkColorChooserWidget #add-color-button {
     border-style: none;
     border-radius: 0;
     background-color: @base_color;
-    color: @text_color_disabled
+    color: mix(@text_color, @base_color, 0.4);
 }
 
 GtkColorChooserWidget #add-color-button:hover {
