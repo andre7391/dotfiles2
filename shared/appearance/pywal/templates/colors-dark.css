@@ -1,5 +1,4 @@
 
-@import url("../../../.cache/wal/colors-linea-nord.css");
 @import url("gtk-version.css");
 @import url("../general/gtk-colors.css");
 @import url("../general/widgets.css");
@@ -7,9 +6,9 @@
 
 @define-color gtk_titlebar_bg_color mix(@gtk_bg_color,@gtk_fg_color,0.05);
 
-@define-color gtk_fg_color @color15;
+@define-color gtk_fg_color {color15};
 @define-color gtk_text_color @gtk_fg_color;
-@define-color gtk_base_color @color0;
+@define-color gtk_base_color {color0};
 @define-color gtk_bg_color mix(@gtk_base_color, @gtk_fg_color, 0.03);
 
 @define-color gtk_button_color mix(@gtk_bg_color, @gtk_fg_color, 0.1);
@@ -24,7 +23,7 @@
 @define-color gtk_borders mix(@gtk_bg_color,@gtk_fg_color,0.1);
 @define-color gtk_transparent_borders alpha(@gtk_fg_color,0.1);
 
-@define-color gtk_selected_bg_color @foreground;
+@define-color gtk_selected_bg_color {foreground};
 @define-color gtk_selected_fg_color shade(@gtk_selected_bg_color, 0.2);
 
 @define-color gtk_highlight alpha(@gtk_selected_bg_color,0.6);
@@ -40,7 +39,7 @@ iconview.content-view.check:not(list),
 check.view:not(treeview):not(:checked):selected,
 radio.view:not(treeview):not(:checked):selected,
 progressbar trough
-{background-clip: padding-box;}
+{{background-clip: padding-box;}}
 check:checked,
 check:indeterminate,
 radio:checked,
@@ -58,16 +57,16 @@ levelbar block,
 scale highlight,
 button.suggested-action,
 button.destructive-action
-{background-clip: border-box;}
+{{background-clip: border-box;}}
 
-.window-frame, .window-frame:backdrop {
+.window-frame, .window-frame:backdrop {{
     box-shadow: 0 0 0 black; /* removes shadow completely */
     border-style: none;
     margin: 1px; /* this retains the ability to resize with the mouse, if 1px is too narrow, set some higher values */
     border-radius: 0;
-}
+}}
 
-window-frame, window, headerbar, .titlebar, menubar {
+window-frame, window, headerbar, .titlebar, menubar {{
 	box-shadow: none;
 	margin: 1px;
-}
+}}

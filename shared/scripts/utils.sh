@@ -1,4 +1,33 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+
+banner() {
+     printf "\n\n\n"
+     printf "%s\n" "########################################"
+     printf "%s\n" "#"
+     printf "%s\n" "# $1"
+     printf "%s\n" "#"
+     printf "%s\n" "########################################"
+}
+
+
+log_info() {
+    if [[ ${BASH_SOURCE[2]} ]] ; then
+        prefix="[INFO - ${BASH_SOURCE[2]}]:"
+    else 
+        prefix="[INFO]:"
+    fi
+    printf "%s\n" "$prefix $1"
+}
+
+log_error() {
+    if [[ ${BASH_SOURCE[2]} ]] ; then
+        prefix="[ERROR - ${BASH_SOURCE[2]}]:"
+    else 
+        prefix="[ERROR]:"
+    fi
+    printf "%s\n" "$prefix $1"
+}
 
 
 ########################################
@@ -7,8 +36,15 @@
 # Arguments:
 #   $1 - Command to execute the program / app
 ########################################
-utils::is_installed() {
-    [[ -x "$(command -v $1)" ]]
+is_installed() {
+
+
+    if ! [[ -x "$(command -v $1)" ]] ; then
+        # log error
+        log_error "package [$1] is not installed"
+
+        return 1
+    fi
 }
 
 
@@ -20,16 +56,16 @@ utils::is_installed() {
 #   $1 - File or folder to be symlinked
 #   $2 - Destiny where the synlink will be created
 ########################################
-utils::symlink() {
+symlink() {
 
     # stop if source file / folder doesnt exists
     if ! [[ -f $1 ]] && ! [[ -d $1 ]] ; then
-        echo "source file / folder doesnt exists [$1]"
+        log_error "source file / folder doesnt exists [$1]"
         return 0
     fi
 
     # if  [[ -d $1 ]] ; then
-    #     find $1 -type f | xargs -L 1 -I file utils::symlink "aa bfile"
+    #     find $1 -type f | xargs -L 1 -I file symlink "aa bfile"
     #     files=$(find $1 -type f )
     #     # for i in $(find . -name \*.txt); do 
     #     #     process "$i"
@@ -37,15 +73,13 @@ utils::symlink() {
     # fi
 
     # create destiny folder
-    if ! [ -e $2 ]; then
-        mkdir -p $2
-    fi
+    mkdir -p $2 2> /dev/null
 
-    # remove file/folder and create symlink
+    # remove file / folder and create symlink
     rm -r $2
     ln -s $(realpath -s $1) $2
     
-    echo "symlink created from: [$1] to [$2]"
+    log_info "symlink created from: [$1] to [$2]"
 }
 
 ########################################
@@ -55,7 +89,7 @@ utils::symlink() {
 #   $1 - File or folder to be symlinked``
 #   $2 - Destiny where the synlink will be created
 ########################################
-utils::copy_to_root() {
+copy_to_root() {
     
     # udisks2 config
     if ! [[ -f $2 ]] && ! [[ -d $2 ]] ; then
@@ -67,6 +101,28 @@ utils::copy_to_root() {
     fi
 }
 
+########################################
+# Find and source all dots scripts (dots.sh) in a directory
+#
+# Arguments:
+#   $1 - Directory with dots to be executed
+########################################
+dots() {
+    
+    # find all scripts in folder
+    scripts=($(find $1 -name dots.sh -type f))
+
+    for script in ${scripts[@]} ; do
+
+        # check to avoid recursion
+        caller=${BASH_SOURCE[1]}
+        if [[ $script != $caller ]] ; then
+
+            # source the script
+            . $script
+        fi
+    done
+}
 
 
 

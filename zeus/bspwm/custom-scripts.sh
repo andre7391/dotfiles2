@@ -6,8 +6,11 @@
 # Arguments:
 #   None
 ########################################
-bspwm::configure_display() {
+bspwm_configure_display() {
     current=$(xrandr --current)
+
+    # default padding
+    bspc config top_padding 25
 
     xrandr --auto
 
@@ -16,4 +19,12 @@ bspwm::configure_display() {
     fi
 }
 
-"$@"
+########################################
+# Run startup programs
+#
+# Arguments:
+#   None
+########################################
+bspwm_custom_startup() {
+    bspwm_configure_display &
+}

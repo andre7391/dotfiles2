@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ########################################
 # Run eww
@@ -6,8 +6,7 @@
 # Arguments:
 #   None
 ########################################
-i3::eww() {
-    
+bspwm_eww() {
     pkill eww
     eww daemon &> /dev/null
     eww open bar-window &> /dev/null
@@ -19,23 +18,32 @@ i3::eww() {
 # Arguments:
 #   None
 ########################################
-i3::picom() {
+bspwm_picom() {
     pkill picom
-    sleep 0.5
+    sleep 0.2
     picom --daemon --config ~/.config/picom/picom.conf 
 }
 
 ########################################
-# Run feh
+# Run pywal
 #
 # Arguments:
 #   None
 ######################################## 
-i3::feh() {
-
-    feh --bg-fill $(shuf -e -n1 ~/.config/wallpapers/*)
+bspwm_pywal() {
+    wal -steq -R
 }
 
+########################################
+# Run sxhkd
+#
+# Arguments:
+#   None
+######################################## 
+bspwm_sxhkd() {
+    pkill sxhkd
+    sxhkd -c ~/.config/bspwm/default-sxhkd.rc
+}
 
 ########################################
 # Run startup programs
@@ -43,11 +51,10 @@ i3::feh() {
 # Arguments:
 #   None
 ########################################
-i3::start() {
-
-    i3::eww &
-    i3::picom &
-    i3::feh &
+bspwm_default_startup() {
+    bspwm_sxhkd &
+    bspwm_eww &
+    bspwm_picom &
+    bspwm_pywal &
 }
 
-"$@"

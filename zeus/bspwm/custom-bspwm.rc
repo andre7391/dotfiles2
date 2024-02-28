@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# source default config
-source ~/.config/bspwm/default-bspwm.rc
+# imports
+. ~/.config/bspwm/custom-scripts.sh
 
-# configure display
-~/.config/bspwm/custom.sh bspwm::configure_display
+# load default config
+. ~/.config/bspwm/default-bspwm.rc
+
+# run bspwm custom startup programs
+bspwm_custom_startup
