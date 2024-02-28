@@ -12,19 +12,24 @@ banner() {
 
 
 log_info() {
-    if [[ ${BASH_SOURCE[2]} ]] ; then
-        prefix="[INFO - ${BASH_SOURCE[2]}]:"
+    local message=$1
+    local script=$2
+
+    if [[ $script ]] ; then
+        local prefix="[INFO - $script]:"
+    elif [[ ${BASH_SOURCE[2]} ]] ; then
+        local prefix="[INFO - ${BASH_SOURCE[2]}]:"
     else 
-        prefix="[INFO]:"
+        local prefix="[INFO]:"
     fi
-    printf "%s\n" "$prefix $1"
+    printf "%s\n" "$prefix $message"
 }
 
 log_error() {
     if [[ ${BASH_SOURCE[2]} ]] ; then
-        prefix="[ERROR - ${BASH_SOURCE[2]}]:"
+        local prefix="[ERROR - ${BASH_SOURCE[2]}]:"
     else 
-        prefix="[ERROR]:"
+        local prefix="[ERROR]:"
     fi
     printf "%s\n" "$prefix $1"
 }
