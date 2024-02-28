@@ -1,4 +1,4 @@
 
 # open terminal
 super + p
-	~/.config/bspwm/custom.sh bspwm::toggle_display
+	. ~/.config/bspwm/custom-scripts.sh && bspwm_toggle_display

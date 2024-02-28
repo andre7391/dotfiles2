@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ########################################
 # Move all workspaces to specified monitor
@@ -6,7 +6,7 @@
 # Arguments:
 #   $1 - Destination monitor 
 ######################################## 
-bspwm::move_workspaces() {
+bspwm_move_workspaces() {
 
     workspaces=(1 2 3 4 5 6 7 8 9)
     
@@ -21,7 +21,7 @@ bspwm::move_workspaces() {
 # Arguments:
 #   None
 ######################################## 
-bspwm::sxhkd() {
+bspwm_sxhkd() {
     pkill sxhkd
     sxhkd -c ~/.config/bspwm/default-sxhkd.rc ~/.config/bspwm/custom-sxhkd.rc
 }
@@ -32,7 +32,7 @@ bspwm::sxhkd() {
 # Arguments:
 #   None
 ########################################
-bspwm::toggle_display() {
+bspwm_toggle_display() {
 
     xrandr --auto
 
@@ -72,7 +72,7 @@ bspwm::toggle_display() {
         bspc desktop S -m eDP-1
         
         # move remaining workspaces to HDMI-1 monitor
-        bspwm::move_workspaces HDMI-1
+        bspwm_move_workspaces HDMI-1
 
         # focus to hide placeholders
         bspc desktop -f S
@@ -93,7 +93,7 @@ bspwm::toggle_display() {
         [[ ! $external_force ]] && sleep 2
 
         # move workspaces to eDP-1 monitor
-        bspwm::move_workspaces eDP-1
+        bspwm_move_workspaces eDP-1
 
         # focus to hide placeholders
         bspc desktop -f 1
@@ -129,9 +129,8 @@ bspwm::toggle_display() {
 # Arguments:
 #   None
 ########################################
-bspwm::start() {
-    bspwm::sxhkd &
-    bspwm::toggle_display true &
+bspwm_custom_startup() {
+    bspwm_sxhkd &
+    bspwm_toggle_display true &
 }
 
-"$@"
