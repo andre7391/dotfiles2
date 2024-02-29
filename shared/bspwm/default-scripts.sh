@@ -35,6 +35,29 @@ bspwm_pywal() {
 }
 
 ########################################
+# Change pywal theme based on wallpaper
+#
+# Arguments:
+#   None
+######################################## 
+bspwm_change_theme() {
+
+    # update theme
+    wal -ste --iterative -i ~/.config/wallpapers
+
+    # reload bspwm colors
+    . ~/.cache/wal/colors.sh
+    bspc config normal_border_color "$color1"
+    bspc config active_border_color "$color2"
+    bspc config focused_border_color "$color15"
+    bspc config presel_feedback_color "$color1"
+
+    # xsettingsd to reload gtk
+    pkill xsettingsd
+    xsettingsd &
+}
+
+########################################
 # Run sxhkd
 #
 # Arguments:

@@ -28,6 +28,9 @@ super + shift + {Left, Down, Up, Right}
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} {1-9,S}
 
+# change theme
+super + o
+	. ~/.config/bspwm/default-scripts.sh && bspwm_change_theme
 
 
 
