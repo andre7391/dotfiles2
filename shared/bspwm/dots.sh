@@ -4,7 +4,7 @@
 dir=$(dirname ${BASH_SOURCE[0]})
 
 # check if packages are installed
-if [[ is_arch ]] ; then 
+if [[ $(is_arch) ]] ; then 
     arch_install bspwm
     arch_install bspc
     arch_install sxhkd

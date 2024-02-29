@@ -8,3 +8,4 @@ symlink $dir/custom-bspwm.rc ~/.config/bspwm/bspwmrc
 symlink $dir/custom-bspwm.rc ~/.config/bspwm/custom-bspwm.rc
 symlink $dir/custom-sxhkd.rc ~/.config/bspwm/custom-sxhkd.rc
 symlink $dir/custom-scripts.sh ~/.config/bspwm/custom-scripts.sh
+symlink $dir/custom-xinit.rc ~/.xinitrc
