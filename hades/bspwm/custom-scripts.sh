@@ -62,8 +62,8 @@ bspwm_toggle_display() {
     if [[ $external_connected && ( $external_toogle || $external_force )  ]] ; then
 
         # configure external display
-        xrandr --output HDMI-1 --primary --mode 1920x1080 --rate 120.00
-        xrandr --output eDP-1 --left-of HDMI-1
+        xrandr --output HDMI-1 --primary --mode 1920x1080 --rate 120.00 --pos 1366x0
+        xrandr --output eDP-1 --pos 0x312
 
         # sleep to let monitor startup
         [[ ! $external_force ]] && sleep 2
