@@ -3,7 +3,7 @@ background = '{background}'
 foreground = '{foreground}'
 
 [colors.cursor]
-text = '{foreground}'
+text = '{background}'
 cursor = '{cursor}'
 
 [colors.normal]
@@ -25,3 +25,6 @@ blue    = '{color12}'
 magenta = '{color13}'
 cyan    = '{color14}'
 white   = '{color15}'
+
+[window]
+opacity = 0.{alpha}

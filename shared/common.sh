@@ -12,6 +12,7 @@ dots shared/alacritty
 dots shared/picom
 dots shared/bspwm
 dots shared/eww
+dots shared/rofi
 
 
 

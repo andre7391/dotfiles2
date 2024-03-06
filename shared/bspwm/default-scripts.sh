@@ -43,7 +43,7 @@ bspwm_pywal() {
 bspwm_change_theme() {
 
     # update theme
-    wal -ste --iterative -i ~/.config/wallpapers
+    wal --saturate 0.7 -ste --iterative -a 80 -i ~/.config/wallpapers
 
     # reload bspwm colors
     . ~/.cache/wal/colors.sh
