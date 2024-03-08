@@ -85,6 +85,6 @@ bspwm_default_startup() {
     bspwm_sxhkd &
     bspwm_eww &
     bspwm_picom &
-    bspwm_pywal &
+    bspwm_change_theme &
 }
 
