@@ -1,5 +1,8 @@
+@import "../../.cache/wallust/colors-eww.scss";
+
+
 // colors
-$background: #1A1B26;
+$transparency: rgba(0,0,0,0);
 $foreground: #A9B1D6;
 
 
@@ -31,6 +34,13 @@ $radius: 4px;
   padding-top: 1px;
   padding-bottom: 1px;
   font-family: "Font Awesome 6 Free"
+}
+
+.box {
+  background-color: $color14;
+  // border-color: $color0;
+  // border-style: solid;
+  // border-width: 1px;
 }
 
 // round corners
@@ -81,28 +91,28 @@ $radius: 4px;
 
 // date 
 .date {
-  background-color: $green;
+  // background-color: $color6;
 }
 
 // audio
 .audio {
-  background-color: $cyan;
+  // background-color: $color10;
 }
 
 // wifi
 .wifi {
-  background-color: $yellow;
+  // background-color: $color11;
 }
 
 // workspace
 .workspace {
   padding-top: 1px;
   padding-bottom: 1px;
-  background-color: $magenta;
+  background-color: $color8;
 }
 
 .workspace.focused {
-  background-color: $blue;
+  background-color: $color14;
 }
 
 .workspace.urgent {
@@ -111,12 +121,12 @@ $radius: 4px;
 
 // performance
 .performance {
-  background-color: $purple;
+  // background-color: $color13;
 }
 
 // nix
 .nix {
-  background-color: $cyan;
+  // background-color: $color14;
   font-weight: 400;
   font-size: 14px;
 }

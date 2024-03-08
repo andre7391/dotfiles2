@@ -43,11 +43,17 @@ bspwm_pywal() {
 ######################################## 
 bspwm_change_theme() {
 
-    # update theme
-    wal --saturate 0.7 -ste --iterative -a 80 -i ~/.config/wallpapers
+    wallpaper=$(shuf -e -n1 ~/.config/wallpapers/*)
+
+    feh --bg-fill $wallpaper
+    wallust run -s $wallpaper
+    eww reload
+
+    # # update theme
+    # wal --saturate 0.7 -ste --iterative -a 80 -i ~/.config/wallpapers
 
     # reload bspwm colors
-    . ~/.cache/wal/colors.sh
+    . ~/.cache/wallust/colors-bash.sh
     bspc config normal_border_color "$color1"
     bspc config active_border_color "$color2"
     bspc config focused_border_color "$color15"

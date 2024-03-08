@@ -5,7 +5,7 @@
     :onclick "scripts/popup calendar"
     :cursor "pointer"
     (box
-      :class "date round"
+      :class "box date round"
       :space-evenly false
       (label
         :class "icon"
@@ -37,7 +37,7 @@
     :onclick "scripts/audio toggle_output_mute"
     (box
       :space-evenly false
-      :class "audio round-left square-right"
+      :class "box audio round-left square-right"
       (label
         :class "icon"
         :text "${audio-output-icon}"
@@ -61,7 +61,7 @@
     :onclick "scripts/audio toggle_input_mute"
     (box
       :space-evenly false
-      :class "audio square-left round-right"
+      :class "box audio square-left round-right"
       (label
         :class "icon"
         :text "${audio-input-icon}"
@@ -84,7 +84,7 @@
     :cursor "pointer"
     (box
       :space-evenly false
-      :class "wifi round"
+      :class "box wifi round"
       (label
         :class "icon"
         :text " "
@@ -112,7 +112,7 @@
 (defwidget memory_usage []
   (box
     :space-evenly false
-    :class "performance square"
+    :class "box performance square"
     (label
       :class "icon"
       :text " "
@@ -125,7 +125,7 @@
 (defwidget cpu_usage []
   (box
     :space-evenly false
-    :class "performance round-left square-right"
+    :class "box performance round-left square-right"
     (label
       :class "icon"
       :text " "
@@ -138,7 +138,7 @@
 (defwidget cpu_temperature [param]
   (box
     :space-evenly false
-    :class "performance square"
+    :class "box performance square"
     (label
       :class "icon"
       :text " "
@@ -152,7 +152,7 @@
 (defwidget disk_usage []
   (box
     :space-evenly false
-    :class "performance square"
+    :class "box performance square"
     (label
       :class "icon"
       :text " "
@@ -165,7 +165,7 @@
 (defwidget network_usage [param]
   (box
     :space-evenly false
-    :class "performance square-left round-right"
+    :class "box performance square-left round-right"
     (label
       :class "icon"
       :text " "
@@ -179,7 +179,7 @@
   (box
     :space-evenly false
     (label
-      :class "nix round icon"
+      :class "box nix round icon"
       :text ""
     )
   )

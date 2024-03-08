@@ -23,11 +23,11 @@ bspwm::print_workspaces() {
     for workspace in ${workspaces[@]} ; do
 
         if [[ ${focused[@]} =~ $workspace ]] ; then
-            class="workspace focused"   
+            class="box workspace focused"   
         elif [[ ${urgent[@]} =~ $workspace ]] ; then
-            class="workspace urgent"
+            class="box workspace urgent"
         else 
-            class="workspace"
+            class="box workspace"
         fi
 
         if [[ $workspace == ${workspaces[0]} ]] && [[ $workspace == ${workspaces[-1]} ]] ; then

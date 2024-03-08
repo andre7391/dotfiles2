@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # imports
-. ~/.cache/wal/colors.sh
+. ~/.cache/wallust/colors-bash.sh
 . ~/.config/bspwm/default-scripts.sh
 
 ########################################

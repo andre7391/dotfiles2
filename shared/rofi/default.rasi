@@ -1,5 +1,5 @@
 /* theme. */
-@import "~/.cache/wal/colors-rofi"
+@import "~/.cache/wallust/colors-rofi"
 
 configuration {
     disable-history: false;
