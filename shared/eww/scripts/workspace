@@ -23,21 +23,17 @@ bspwm::print_workspaces() {
     for workspace in ${workspaces[@]} ; do
 
         if [[ ${focused[@]} =~ $workspace ]] ; then
-            class="box workspace focused"   
+            class="workspace focused"   
         elif [[ ${urgent[@]} =~ $workspace ]] ; then
-            class="box workspace urgent"
-        else 
-            class="box workspace"
+            class="workspace urgent"
+        else
+            class="workspace"
         fi
 
-        if [[ $workspace == ${workspaces[0]} ]] && [[ $workspace == ${workspaces[-1]} ]] ; then
-            class="$class round"
-        elif [[ $workspace == ${workspaces[0]} ]] ; then
-            class="$class round-left square-right"
+        if [[ $workspace == ${workspaces[0]} ]] ; then
+            class="$class first"
         elif [[ $workspace == ${workspaces[-1]} ]] ; then
-            class="$class square-left round-right"
-        else 
-            class="$class square"
+            class="$class last"
         fi
     
         output="$output (eventbox :cursor \"hand\" :onclick \"bspc desktop -f $workspace\" (label :class \"$class\" :text \"$workspace\"))"

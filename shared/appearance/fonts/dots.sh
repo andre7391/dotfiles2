@@ -14,7 +14,7 @@ symlink $dir/regular ~/.local/share/fonts/regular
 # compare md5sum to check if the fonts changed
 touch ~/.local/share/fonts-md5sum
 old=$(<~/.local/share/fonts-md5sum)
-new=$(find ~/.local/share/fonts | sort | md5sum)
+new=$(find -L ~/.local/share/fonts | sort | md5sum)
 
 if [[ $old != $new ]] ; then 
     sudo fc-cache -f >> /dev/null

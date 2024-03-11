@@ -10,7 +10,7 @@ configuration {
     background-color: transparent;
     padding: 0;
     margin: 0;
-    accent-color: @color1;
+    accent-color: @color13;
 }
 
 window {

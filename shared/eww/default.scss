@@ -6,127 +6,76 @@ $transparency: rgba(0,0,0,0);
 $foreground: #A9B1D6;
 
 
-$black: #24283B;
-$gray: #565F89;
-$red: #F7768E;
-$green: #73DACA;
-$yellow: #E0AF68;
-$blue: #7AA2F7;
-$magenta: #565F89;
-$cyan: #7DCFFF;
-$white: $foreground;
-$purple: #7d63ad;
-
 // global
-$spacing: 4px;
-$radius: 4px;
+$spacing: 8px;
+$gap: 8px;
+$radius: 6px;
+$height: 24px;
 
 * {
   all: unset;
   font-family: "Ubuntu Mono";
   font-size: 14px;
-  color: $black;
+  color: $color15;
 }
-
-.icon {
-  font-weight: 900;
-  font-size: 12px;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  font-family: "Font Awesome 6 Free"
-}
-
-.box {
-  background-color: $color14;
-  // border-color: $color0;
-  // border-style: solid;
-  // border-width: 1px;
-}
-
-// round corners
-.round {
-  border-radius: $radius;
-  padding-left: $spacing;
-  padding-right: $spacing;
-  margin-left: $spacing;
-
-}
-
-.round-left {
-  border-radius: $radius 0 0 $radius;
-  padding-left: $spacing;
-  margin-left: $spacing;
-}
-
-.round-right {
-  border-radius: 0 $radius $radius 0;
-  padding-right: $spacing;
-}
-
-// square corners
-.square {
-  padding-left: $spacing;
-  padding-right: $spacing;
-  margin-left: #{$spacing / 2};
-}
-
-.square-left {
-  padding-left: $spacing;
-  margin-left: #{$spacing / 2};
-}
-
-.square-right {
-  padding-right: $spacing;
-}
-
-
-
-
 
 // bar
 .bar {
   background-color: $background;
-  padding: $spacing $spacing $spacing 0;
+  margin: $gap $gap 0px $gap;
+  min-height: $height;
+
+  border-color: $color15;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: $radius;
 }
 
-// date 
-.date {
-  // background-color: $color6;
+// icon
+.icon {
+  font-size: 16px;
+  font-family: "Symbols Nerd Font";
 }
 
-// audio
-.audio {
-  // background-color: $color10;
+// separetor
+.separator {
+  font-weight: bold;
+  padding: 0px $spacing 0px $spacing;
 }
 
-// wifi
-.wifi {
-  // background-color: $color11;
+// spacer
+.spacer {
+  font-weight: bold;
+  padding-left: $spacing / 2;
 }
 
-// workspace
+// workspaces
+.workspaces {
+  min-height: $height;
+}
+
 .workspace {
-  padding-top: 1px;
-  padding-bottom: 1px;
+  padding: 0px 4px;
+  margin: 4px 2px;
+
+  border-radius: 2px;
+
   background-color: $color8;
+  color: $color0;
 }
 
 .workspace.focused {
-  background-color: $color14;
+  background-color: $color13;
 }
 
 .workspace.urgent {
-  background-color: $red;
+  background-color: $color2;
 }
 
-// performance
-.performance {
-  // background-color: $color13;
+.workspace.first {
+  margin-left: 0;
 }
 
-// nix
-.nix {
-  // background-color: $color14;
-  font-weight: 400;
-  font-size: 14px;
+.workspace.last {
+  margin-right: 0;
 }

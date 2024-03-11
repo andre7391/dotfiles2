@@ -29,10 +29,17 @@
   (box
     :halign "end"
     :space-evenly false
+    
+    (separator)      
     (wifi)
+
+    (separator)
     (audio)
+      
+    (separator)
     (date)
     
+    (spacer)(spacer)(spacer)
   )
 )
 
@@ -41,34 +48,30 @@
   (box
     :halign "start"
     :space-evenly false
-    (performance)
-    (workspaces)
-    ;;(control)
-    ;;(separator)
-  )
-)
-
-;; performance
-(defwidget performance []
-  (eventbox
-    :cursor "pointer"
-    (box
-      :space-evenly false
-      (nix)
-      (cpu_usage)
-      (cpu_temperature :param "K10TEMP_TCTL") ; CORETEMP_PACKAGE_ID_0
-      (memory_usage)
-      (disk_usage)
-      (network_usage :param "wlan0") ; wlp2s0
+    
+    (spacer)(spacer)(spacer)
+    (power 
+      :icon "󰣇"
     )
+    
+    (separator)
+    (cpu_usage)
+    
+    (separator)
+    (cpu_temperature :param "K10TEMP_TCTL") ; CORETEMP_PACKAGE_ID_0
+    
+    (separator)
+    (memory_usage)
+    
+    (separator)
+    (disk_usage)
+    
+    (separator)
+    (network_usage :param "wlan0") ; wlp2s0    (separator)
+    
+    (separator)
+    (workspaces)
+    
+    (separator)
   )
 )
-
-
-
-
-
-
-
-
-

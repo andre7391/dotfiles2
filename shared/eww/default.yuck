@@ -1,16 +1,32 @@
 
+;; separator
+(defwidget separator []
+  (label
+    :class "separator"
+    :text "|"
+  )
+)
+
+;; spacer
+(defwidget spacer [?visible]
+  (label
+    :class "spacer"
+    :visible {visible}
+  )
+)
+
 ;; date
 (defwidget date []
   (eventbox
     :onclick "scripts/popup calendar"
     :cursor "pointer"
     (box
-      :class "box date round"
       :space-evenly false
       (label
         :class "icon"
-        :text " "
+        :text "󰸘"
       )
+      (spacer)
       "${date}"
     )
   )
@@ -25,6 +41,7 @@
   (box
     :space-evenly false
     (audio-output)
+    (separator)
     (audio-input)
   )
 )
@@ -37,12 +54,17 @@
     :onclick "scripts/audio toggle_output_mute"
     (box
       :space-evenly false
-      :class "box audio round-left square-right"
       (label
         :class "icon"
         :text "${audio-output-icon}"
       )
-      {audio-output-volume == "mute" ? " " : "${audio-output-volume}%"}
+      (spacer
+        :visible {audio-output-volume != "mute"}
+      )
+      (label
+        :visible {audio-output-volume != "mute"}
+        :text "${audio-output-volume}%"
+      )
     )
   )
 )
@@ -61,12 +83,17 @@
     :onclick "scripts/audio toggle_input_mute"
     (box
       :space-evenly false
-      :class "box audio square-left round-right"
       (label
         :class "icon"
         :text "${audio-input-icon}"
       )
-      {audio-input-volume == "mute" ? " " : "${audio-input-volume}%"}
+      (spacer
+        :visible {audio-input-volume != "mute"}
+      )
+      (label
+        :visible {audio-input-volume != "mute"}
+        :text "${audio-input-volume}%"
+      )
     )
   )
 )
@@ -84,11 +111,11 @@
     :cursor "pointer"
     (box
       :space-evenly false
-      :class "box wifi round"
       (label
         :class "icon"
-        :text " "
+        :text "󰤨"
       )
+      (spacer)
       "${wifi-text}"
     )
   )
@@ -97,6 +124,7 @@
   :interval "5s"
   "scripts/wifi text"
 )
+
 
 ;; workspaces
 (defwidget workspaces []
@@ -108,15 +136,16 @@
   "scripts/workspace bspwm::watch_workspaces"
 )
 
+
 ;; memory usage
 (defwidget memory_usage []
   (box
     :space-evenly false
-    :class "box performance square"
     (label
       :class "icon"
-      :text " "
+      :text "󰍛"
     )
+    (spacer)
     "${round(EWW_RAM.available_mem / 1073741824, 1)}G"
   )
 )
@@ -125,11 +154,11 @@
 (defwidget cpu_usage []
   (box
     :space-evenly false
-    :class "box performance round-left square-right"
     (label
       :class "icon"
-      :text " "
+      :text "󰇅"
     )
+    (spacer)
     "${round(EWW_CPU.avg, 0)}%"
   )
 )
@@ -138,11 +167,11 @@
 (defwidget cpu_temperature [param]
   (box
     :space-evenly false
-    :class "box performance square"
     (label
       :class "icon"
-      :text " "
+      :text "󰔏"
     )
+    (spacer)
     "${round(EWW_TEMPS[param], 0)}°C"
   )
   
@@ -152,11 +181,11 @@
 (defwidget disk_usage []
   (box
     :space-evenly false
-    :class "box performance square"
     (label
       :class "icon"
-      :text " "
+      :text "󰋊"
     )
+    (spacer)
     "${round(EWW_DISK['/'].free / 1073741824, 1)}G"
   )
 )
@@ -165,22 +194,22 @@
 (defwidget network_usage [param]
   (box
     :space-evenly false
-    :class "box performance square-left round-right"
     (label
       :class "icon"
-      :text " "
+      :text "󱂇"
     )
+    (spacer)
     "${round(EWW_NET[param].NET_DOWN/260000 + EWW_NET[param].NET_UP/260000, 1)}M"
+    ; "${EWW_NET}"
   )
 )
 
 
-(defwidget nix []
+(defwidget power [icon]
   (box
     :space-evenly false
     (label
-      :class "box nix round icon"
-      :text ""
+      :text {icon}
     )
   )
 )
