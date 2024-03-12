@@ -18,7 +18,7 @@ get_output_icon() {
     mute=$(get_output_mute)
     volume=$(get_output_volume)
     if [ $mute = "yes" ]; then 
-        echo ""
+        echo "󰝟"
     elif ((volume > 66)); then 
         echo ""
     elif ((volume > 33)); then 
