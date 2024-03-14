@@ -4,10 +4,12 @@
 
 ;; bar-window
 (defwindow bar-window
-  :monitor "<primary>"
-  :stacking "fg"
+  ; :monitor "<primary>"
+  :stacking "bg"
   :windowtype "dock"
-  :wm-ignore false
+  ; :focusable false 
+  ; :exclusive true 
+  ; :wm-ignore false
   :geometry (geometry
     :width "100%"
     :anchor "center top"

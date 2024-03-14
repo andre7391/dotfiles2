@@ -10,6 +10,8 @@ bspwm_eww() {
     pkill eww
     eww daemon &> /dev/null
     eww open bar-window &> /dev/null
+    sleep 0.1
+    xdo below -t $(xdo id -n root) $(xdo id -n eww)
 }
 
 ########################################
@@ -20,7 +22,7 @@ bspwm_eww() {
 ########################################
 bspwm_picom() {
     pkill picom
-    sleep 0.2
+    sleep 0.1
     picom --daemon --config ~/.config/picom/picom.conf 
 }
 
@@ -48,6 +50,8 @@ bspwm_change_theme() {
     feh --bg-fill $wallpaper
     wallust run -s $wallpaper
     eww reload
+    xdo below -t $(xdo id -n root) $(xdo id -n eww)
+
 
     # # update theme
     # wal --saturate 0.7 -ste --iterative -a 80 -i ~/.config/wallpapers

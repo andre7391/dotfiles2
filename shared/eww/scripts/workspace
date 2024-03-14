@@ -32,7 +32,9 @@ bspwm::print_workspaces() {
 
         if [[ $workspace == ${workspaces[0]} ]] ; then
             class="$class first"
-        elif [[ $workspace == ${workspaces[-1]} ]] ; then
+        fi
+        
+        if [[ $workspace == ${workspaces[-1]} ]] ; then
             class="$class last"
         fi
     
