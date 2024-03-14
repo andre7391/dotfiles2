@@ -66,7 +66,7 @@ bspwm_toggle_display() {
         xrandr --output eDP-1 --pos 0x312
 
         # sleep to let monitor startup
-        [[ ! $external_force ]] && sleep 2
+        # [[ ! $external_force ]] && sleep 2
 
         # move workspace S to eDP-1 monitor
         bspc desktop S -m eDP-1
@@ -80,17 +80,17 @@ bspwm_toggle_display() {
 
         # bar padding
         bspc config -m eDP-1 top_padding 0
-        bspc config -m HDMI-1 top_padding 25
+        bspc config -m HDMI-1 top_padding 36
 
         rm /tmp/toggle_display 2> /dev/null
     else
 
         # configure internal display
-        xrandr --output eDP-1 --primary 
-        xrandr --output HDMI-1 --off
+        xrandr --output eDP-1 --primary
+        # xrandr --output HDMI-1 --same-as eDP-1
 
         # sleep to let monitor startup
-        [[ ! $external_force ]] && sleep 2
+        # [[ ! $external_force ]] && sleep 2
 
         # move workspaces to eDP-1 monitor
         bspwm_move_workspaces eDP-1
@@ -99,12 +99,12 @@ bspwm_toggle_display() {
         bspc desktop -f 1
 
         # bar padding
-        bspc config -m eDP-1 top_padding 25
+        bspc config -m eDP-1 top_padding 36
 
         touch /tmp/toggle_display
     fi
 
-    eww close bar-window && eww open bar-window
+    eww reload
 }
 
 
