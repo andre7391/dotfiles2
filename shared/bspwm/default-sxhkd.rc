@@ -28,14 +28,18 @@ super + {grave,Tab}
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} {1-9,S}
 
-# change theme
-super + o
-	. ~/.config/bspwm/default-scripts.sh && bspwm_change_theme
+# set the window mode
+super + {t,shift + t,f,s}
+	bspc node -t {tiled,pseudo_tiled,\~fullscreen,\~floating}
 
 # alternate between the tiled and monocle layout
 super + m
 	bspc desktop -l next
 
+# change theme
+super + o
+	. ~/.config/bspwm/default-scripts.sh && bspwm_change_theme
+	
 # #
 # # bspwm hotkeys
 # #
@@ -62,9 +66,6 @@ super + m
 # # state/flags
 # #
 
-# set the window state
-super + {t,shift + t,f,s}
-	bspc node -t {tiled,pseudo_tiled,\~fullscreen,\~floating}
 
 # # set the node flags
 # super + ctrl + {m,x,y,z}

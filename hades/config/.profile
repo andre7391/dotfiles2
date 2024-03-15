@@ -30,8 +30,10 @@ fi
 # enviroment variables
 export JAVA8=/flat/andre/programs/java/amazon-corretto-8
 export JAVA11=/flat/andre/programs/java/amazon-corretto-11
-export JAVA17=/flat/andre/programs/java/amazon-corretto-17
-export JAVA_HOME=$JAVA8
+export JAVA_C17=/flat/andre/programs/java/amazon-corretto-17
+export JAVA21=/flat/andre/programs/java/amazon-corretto-21
+export JAVA17=/flat/andre/programs/java/jdk-17
+export JAVA_HOME=$JAVA17
 
 export M2_HOME=/flat/andre/programs/maven/maven-3.6.3
 export M2_REPO=/flat/andre/programs/maven/repository
