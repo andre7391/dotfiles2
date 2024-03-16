@@ -79,3 +79,17 @@ $height: 24px;
 .workspace.last {
   margin-right: 0;
 }
+
+.layout {
+  padding: 0px 4px;
+  margin: 4px 0px;
+
+  border-radius: 2px;
+
+  background-color: $color8;
+  color: $color0;
+}
+
+.layout.Monocle {
+  background-color: $color13;
+}

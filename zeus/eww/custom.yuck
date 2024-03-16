@@ -72,8 +72,11 @@
     (network_usage :param "wlan0") ; wlp2s0    (separator)
     
     (separator)
-    (workspaces)
+    (layout)
     
+    (separator)
+    (workspaces)
+
     (separator)
   )
 )

@@ -9,6 +9,7 @@
 banner "Common modules"
 
 dots shared/alacritty
+dots shared/kitty
 dots shared/picom
 dots shared/bspwm
 dots shared/eww

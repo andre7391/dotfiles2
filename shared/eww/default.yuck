@@ -1,7 +1,8 @@
 
 ;; separator
-(defwidget separator []
+(defwidget separator [?visible]
   (label
+    :visible {visible}
     :class "separator"
     :text "|"
   )
@@ -50,8 +51,8 @@
 (defwidget audio-output []
   (eventbox
     :cursor "pointer"
-    :onscroll "scripts/audio set_output_volume {}"
-    :onclick "scripts/audio toggle_output_mute"
+    :onscroll "./default.sh set_output_audio_volume {}"
+    :onclick "./default.sh toggle_output_audio_mute"
     (box
       :space-evenly false
       (label
@@ -69,18 +70,18 @@
   )
 )
 (deflisten audio-output-volume
-  "scripts/audio subscribe_output_volume"
+  "./default.sh subscribe_output_audio_volume"
 )
 (deflisten audio-output-icon
-  "scripts/audio subscribe_output_icon"
+  "./default.sh subscribe_output_audio_icon"
 )
 
 ;; audio-input
 (defwidget audio-input []
   (eventbox
     :cursor "pointer"
-    :onscroll "scripts/audio set_input_volume {}"
-    :onclick "scripts/audio toggle_input_mute"
+    :onscroll "./default.sh set_input_audio_volume {}"
+    :onclick "./default.sh toggle_input_audio_mute"
     (box
       :space-evenly false
       (label
@@ -98,10 +99,10 @@
   )
 )
 (deflisten audio-input-volume
-  "scripts/audio subscribe_input_volume"
+  "./default.sh subscribe_input_audio_volume"
 )
 (deflisten audio-input-icon
-  "scripts/audio subscribe_input_icon"
+  "./default.sh subscribe_input_audio_icon"
 )
 
 ;; wifi
@@ -133,9 +134,26 @@
   )
 )
 (deflisten workspace
-  "scripts/workspace bspwm::watch_workspaces"
+  "./default.sh watch_bspwm_workspaces"
 )
 
+;; layout
+(defwidget layout []
+  (eventbox
+    :cursor "pointer"
+    :onclick "bspc desktop -l next"
+    (box
+      :space-evenly false
+      (label
+        :class "layout ${layout}"
+        :text "${layout}"
+      )
+    )
+  )
+)
+(deflisten layout
+  "./default.sh watch_bspwm_layout"
+)
 
 ;; memory usage
 (defwidget memory_usage []

@@ -51,7 +51,7 @@ bspwm_change_theme() {
     wallust run -s $wallpaper
     eww reload
     xdo below -t $(xdo id -n root) $(xdo id -n eww)
-
+    kill -SIGUSR1 $(pidof kitty) # reload kitty
 
     # # update theme
     # wal --saturate 0.7 -ste --iterative -a 80 -i ~/.config/wallpapers

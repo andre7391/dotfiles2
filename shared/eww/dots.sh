@@ -15,4 +15,5 @@ symlink $dir/default.yuck ~/.config/eww/eww.yuck
 symlink $dir/default.scss ~/.config/eww/eww.scss
 symlink $dir/default.yuck ~/.config/eww/default.yuck
 symlink $dir/default.scss ~/.config/eww/default.scss
-symlink $dir/scripts ~/.config/eww/scripts
+symlink $dir/default.sh ~/.config/eww/default.sh
+# symlink $dir/scripts ~/.config/eww/scripts
