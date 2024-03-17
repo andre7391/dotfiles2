@@ -79,6 +79,18 @@ bspwm_sxhkd() {
     sxhkd -c ~/.config/bspwm/default-sxhkd.rc
 }
 
+
+########################################
+# Set keyboard layout
+#
+# Arguments:
+#   None
+######################################## 
+bspwm_keyboard() {
+    setxkbmap -layout us -variant altgr-intl
+}
+
+
 ########################################
 # Run startup programs
 #
@@ -90,5 +102,6 @@ bspwm_default_startup() {
     bspwm_eww &
     bspwm_picom &
     bspwm_change_theme &
+    bspwm_keyboard &
 }
 
