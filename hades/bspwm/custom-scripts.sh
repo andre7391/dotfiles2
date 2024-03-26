@@ -80,7 +80,7 @@ bspwm_toggle_display() {
 
         # bar padding
         bspc config -m eDP-1 top_padding 0
-        bspc config -m HDMI-1 top_padding 36
+        bspc config -m HDMI-1 top_padding 32
 
         rm /tmp/toggle_display 2> /dev/null
     else
@@ -99,7 +99,7 @@ bspwm_toggle_display() {
         bspc desktop -f 1
 
         # bar padding
-        bspc config -m eDP-1 top_padding 36
+        bspc config -m eDP-1 top_padding 32
 
         touch /tmp/toggle_display
     fi

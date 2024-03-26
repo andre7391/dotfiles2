@@ -64,3 +64,7 @@ super + r
 # change theme
 super + o
 	. ~/.config/bspwm/default-scripts.sh && bspwm_change_theme
+
+# printscreen
+super + Insert
+	flameshot gui --clipboard

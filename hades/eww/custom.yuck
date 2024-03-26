@@ -68,6 +68,9 @@
     (network_usage :param "wlp2s0")
     
     (separator)
+    (layout)
+
+    (separator)
     (workspaces)
     
     (separator)
