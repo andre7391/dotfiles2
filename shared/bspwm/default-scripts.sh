@@ -88,6 +88,7 @@ bspwm_sxhkd() {
 ######################################## 
 bspwm_keyboard() {
     setxkbmap -layout us -variant altgr-intl
+    numlockx
 }
 
 
