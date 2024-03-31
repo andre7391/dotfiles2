@@ -17,6 +17,18 @@ bspwm_configure_display() {
 }
 
 ########################################
+# Function to configure input using xinput
+#
+# Arguments:
+#   None
+########################################
+bspwm_configure_input() {
+    xinput set-prop pointer:"Logitech G603" "libinput Accel Profile Enabled" 0 1 0
+}
+
+
+
+########################################
 # Run startup programs
 #
 # Arguments:
