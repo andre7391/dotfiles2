@@ -8,14 +8,12 @@ if [[ $(is_arch) ]] ; then
     arch_install bspwm
     arch_install bspc
     arch_install sxhkd
-    arch_install maim
     arch_install xclip
     arch_install xdo
 else
     is_installed bspwm
     is_installed bspc
     is_installed sxhkd
-    is_installed maim
     is_installed xclip
     is_installed xdo
 fi

@@ -91,18 +91,17 @@ symlink() {
 # Copy a file to a root owned folder and change file ownership
 #
 # Arguments:
-#   $1 - File or folder to be symlinked``
-#   $2 - Destiny where the synlink will be created
+#   $1 - File or folder to be copied
+#   $2 - Destiny where the copy will be created
 ########################################
 copy_to_root() {
     
-    # udisks2 config
-    if ! [[ -f $2 ]] && ! [[ -d $2 ]] ; then
+    if ! diff -qr $1 $2 &> /dev/null ; then
         sudo cp -r $1 $2
         sudo chown -R root:root $2
-        echo "file copied from: [$1] to [$2]"
+        log_info "file copied from: [$1] to [$2]"
     else
-        echo "file already exists: [$2]"
+        log_info "file already exists: [$2]"
     fi
 }
 

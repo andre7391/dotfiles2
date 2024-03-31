@@ -108,20 +108,15 @@ bspwm_toggle_display() {
 }
 
 
-# ## Two Monitors Setup (Laptop and external monitor, set 4 workspaces on each monitor)
-# two_monitors_workspaces() {
-# 	# change these values according to your system
-# 	# you can use `xrandr -q` to get the names of monitors
-# 	INTERNAL_MONITOR="eDP"
-# 	EXTERNAL_MONITOR="HDMI-A-0"
-# 	if [[ $(xrandr -q | grep "${EXTERNAL_MONITOR} connected") ]]; then
-# 		bspc monitor "$EXTERNAL_MONITOR" -d '' '' '' ''
-# 		bspc monitor "$INTERNAL_MONITOR" -d '' '' '' ''
-# 		bspc wm -O "$EXTERNAL_MONITOR" "$INTERNAL_MONITOR"
-# 	else
-# 		bspc monitor "$INTERNAL_MONITOR" -d '' '' '' '' '' '' '' ''
-# 	fi
-# }
+########################################
+# Run mouse config
+#
+# Arguments:
+#   None
+########################################
+bspwm_mouse() {
+    ~/.local/bin/mouse.sh
+}
 
 ########################################
 # Run startup programs
@@ -132,5 +127,6 @@ bspwm_toggle_display() {
 bspwm_custom_startup() {
     bspwm_sxhkd &
     bspwm_toggle_display true &
+    bspwm_mouse &
 }
 
