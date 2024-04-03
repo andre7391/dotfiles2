@@ -1,1 +1,0 @@
-SUBSYSTEM=="input", ACTION=="add", ATTR{name}=="G603 Mouse", RUN+="/home/andre.rodrigues/.local/bin/mouse.sh"

@@ -1,4 +1,0 @@
-
-# toggle_display
-super + p
-	. ~/.config/bspwm/custom-scripts.sh && bspwm_toggle_display
