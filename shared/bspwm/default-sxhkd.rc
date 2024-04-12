@@ -10,7 +10,7 @@ super + {c,shift + c}
 
 # program launcher
 super + d
-	rofi -show drun
+	rofi -show run
 
 # restart bspwm
 super + shift + r

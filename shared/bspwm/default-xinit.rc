@@ -2,4 +2,4 @@
 
 xsetroot -cursor_name left_ptr
 
-exec bspwm
+exec dbus-launch --exit-with-x11 bspwm
