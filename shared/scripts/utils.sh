@@ -114,7 +114,7 @@ copy_to_root() {
 dots() {
     
     # find all scripts in folder
-    scripts=($(find $1 -name dots.sh -type f))
+    scripts=($(find $1/* -name dots.sh -type f))
 
     for script in ${scripts[@]} ; do
 
