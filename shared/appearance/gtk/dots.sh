@@ -11,8 +11,6 @@ else
 fi
 
 # wallpapers
-symlink $dir/flat-color ~/.themes/flat-color
-symlink $dir/linea-nord ~/.themes/linea-nord
 symlink $dir/gtk2.conf ~/.gtkrc-2.0
 symlink $dir/gtk3.conf ~/.config/gtk-3.0/settings.ini
 symlink $dir/xsettings.conf ~/.config/xsettingsd/xsettingsd.conf
