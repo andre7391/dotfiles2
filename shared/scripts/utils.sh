@@ -66,7 +66,7 @@ symlink() {
     # stop if source file / folder doesnt exists
     if ! [[ -f $1 ]] && ! [[ -d $1 ]] ; then
         log_error "source file / folder doesnt exists [$1]"
-        return 0
+        return 1
     fi
 
     # if  [[ -d $1 ]] ; then
@@ -97,11 +97,13 @@ symlink() {
 copy_to_root() {
     
     if ! diff -qr $1 $2 &> /dev/null ; then
+        sudo chattr -i $2
         sudo cp -r $1 $2
         sudo chown -R root:root $2
         log_info "file copied from: [$1] to [$2]"
     else
         log_info "file already exists: [$2]"
+        return 1
     fi
 }
 

@@ -14,6 +14,8 @@ dots shared/picom
 dots shared/bspwm
 dots shared/eww
 dots shared/rofi
+dots shared/lf
+dots shared/others
 
 
 

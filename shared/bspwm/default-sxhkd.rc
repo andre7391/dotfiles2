@@ -2,7 +2,8 @@
 
 # open terminal
 super + q
-	kitty -1
+	. ~/.environment && \
+	kitty
 
 # close focused window
 super + {c,shift + c}
@@ -10,6 +11,7 @@ super + {c,shift + c}
 
 # program launcher
 super + d
+	. ~/.environment && \
 	rofi -show run
 
 # restart bspwm
@@ -17,7 +19,7 @@ super + shift + r
 	bspc wm -r
 
 # change focus / move focused window
-super + {_,shift} + {Left,Down,Up,Right}
+super + {_,shift} + {h,j,k,l}
 	bspc node {-f,-s} {west,south,north,east}
 
 # focus the last node / last desktop
@@ -41,17 +43,17 @@ super + {shift,_} + e
 	bspc node -f {prev,next}.local.!hidden.window 
 
 # expand a window
-super + alt + {Left,Down,Up,Right}
+super + alt + {h,j,k,l}
 	s=50 ; \
 	bspc node -z {left -$s 0,bottom 0 $s,top 0 -$s,right $s 0}
 
 # contract a window
-super + alt + shift + {Left,Down,Up,Right}
+super + alt + shift + {h,j,k,l}
 	s=50 ; \
 	bspc node -z {right -$s 0,top 0 $s,bottom 0 -$s,left $s 0}
 
 # move a floating window
-super + ctrl + {Left,Down,Up,Right}
+super + ctrl + {h,j,k,l}
 	s=50 ; \
 	bspc node -v {-$s 0,0 $s,0 -$s,$s 0}
 
