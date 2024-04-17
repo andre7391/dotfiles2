@@ -1,20 +1,30 @@
 #!/usr/bin/env bash
 
-# source utils
-. shared/scripts/utils.sh
+# current directory
+dir=$(dirname ${BASH_SOURCE[0]})
 
-# common
-. shared/common.sh
+# parent directory
+parent=$(dirname $dir)
+
+# imports
+. $parent/shared/scripts/utils.sh
+. $parent/shared/scripts/arch.sh
+
+
+banner "Common modules"
+dots shared/alacritty
+dots shared/kitty
+dots shared/picom
+dots shared/bspwm
+dots shared/eww
+dots shared/rofi
+dots shared/lf
+dots shared/others
+
+
+banner "Appearance and theming"
+dots shared/appearance
 
 
 banner "Zeus"
 dots zeus
-
-    # # bspwm
-    # utils::symlink zeus/bspwm/custom-bspwm.rc ~/.config/bspwm/bspwmrc
-    # utils::symlink zeus/bspwm/custom-bspwm.rc ~/.config/bspwm/custom-bspwm.rc
-    # utils::symlink zeus/bspwm/custom.sh ~/.config/bspwm/custom.sh
-
-    # # eww
-    # utils::symlink zeus/eww/custom.yuck ~/.config/eww/eww.yuck
-    # utils::symlink zeus/eww/custom.yuck ~/.config/eww/custom.yuck
