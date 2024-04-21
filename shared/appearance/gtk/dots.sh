@@ -10,7 +10,13 @@ else
     is_installed xsettingsd
 fi
 
-# wallpapers
+# theme
+symlink $dir/catppuccin-mocha/theme ~/.themes/catppuccin-mocha
+
+# cursor
+symlink $dir/catppuccin-mocha/cursor ~/.icons/catppuccin-mocha
+
+# configs
 symlink $dir/gtk2.conf ~/.gtkrc-2.0
 symlink $dir/gtk3.conf ~/.config/gtk-3.0/settings.ini
 symlink $dir/xsettings.conf ~/.config/xsettingsd/xsettingsd.conf
