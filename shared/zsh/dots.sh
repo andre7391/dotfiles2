@@ -12,5 +12,11 @@ else
     is_installed starship
 fi
 
+# set zsh as default shell
+if [[ ! $SHELL =~ 'zsh' ]] ; then
+    chsh -s /usr/bin/zsh
+fi
+
 # symlink
 symlink $dir/starship.toml ~/.config/starship.toml
+symlink $dir/zshrc ~/.zshrc
