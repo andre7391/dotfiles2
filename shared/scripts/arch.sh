@@ -36,9 +36,9 @@ arch_install () {
         # install the package
         yay -S --needed --noconfirm $package > /dev/null
 
-        log_info "package installed successfully: [$package]"
+        log_info "package installed successfully ${cyan}[$package]${normal}"
     else
-        log_info "package already installed: [$package]"
+        log_info "package already installed ${cyan}[$package]${normal}"
     fi
 }
 
@@ -83,8 +83,8 @@ arch_install_eww () {
             sudo cp target/release/eww /usr/bin
         )
 
-        log_info "package installed successfully: [eww]"
+        log_info "package installed successfully ${cyan}[eww]${normal}"
     else
-        log_info "package already installed: [eww]"
+        log_info "package already installed ${cyan}[eww]${normal}"
     fi
 }

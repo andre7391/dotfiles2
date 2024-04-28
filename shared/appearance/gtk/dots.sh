@@ -20,5 +20,6 @@ symlink $dir/catppuccin-mocha/cursor ~/.icons/catppuccin-mocha
 symlink $dir/gtk2.conf ~/.gtkrc-2.0
 symlink $dir/gtk3.conf ~/.config/gtk-3.0/settings.ini
 symlink $dir/xsettings.conf ~/.config/xsettingsd/xsettingsd.conf
+symlink $dir/xresources ~/.Xresources
 
 

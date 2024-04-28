@@ -26,7 +26,15 @@ bspwm_configure_mouse() {
     xinput set-prop pointer:"Logitech G603" "libinput Accel Profile Enabled" 0 1 0
 }
 
-
+########################################
+# Function to configure mouse using xinput
+#
+# Arguments:
+#   None
+########################################
+bspwm_udiskie() {
+    udiskie
+}
 
 ########################################
 # Run startup programs
@@ -37,4 +45,5 @@ bspwm_configure_mouse() {
 bspwm_custom_startup() {
     bspwm_configure_display &
     bspwm_configure_mouse &
+    bspwm_udiskie &
 }

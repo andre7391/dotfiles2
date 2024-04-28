@@ -11,8 +11,7 @@ parent=$(dirname $dir)
 . $parent/shared/scripts/arch.sh
 
 
-banner "Common modules"
-dots shared/alacritty
+banner "Common Modules"
 dots shared/kitty
 dots shared/picom
 dots shared/bspwm
@@ -20,9 +19,10 @@ dots shared/eww
 dots shared/rofi
 dots shared/lf
 dots shared/others
+dots shared/zsh
 
 
-banner "Appearance and theming"
+banner "Appearance and Theming"
 dots shared/appearance
 
 

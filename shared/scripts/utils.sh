@@ -1,37 +1,39 @@
 #!/usr/bin/env bash
 
+# styles
+bold=$(tput bold)
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+yellow=$(tput setaf 3)
+blue=$(tput setaf 4)
+pink=$(tput setaf 5)
+cyan=$(tput setaf 6)
+normal=$(tput sgr0)
 
 banner() {
-     printf "\n\n\n"
-     printf "%s\n" "########################################"
-     printf "%s\n" "#"
-     printf "%s\n" "# $1"
-     printf "%s\n" "#"
-     printf "%s\n" "########################################"
+     printf "\n\n"
+     printf "%s\n" "${bold}${green}:: ${yellow}$1 ${bold}${green}::${normal}"
 }
-
 
 log_info() {
     local message=$1
     local script=$2
 
     if [[ $script ]] ; then
-        local prefix="[INFO - $script]:"
+        local prefix="${bold}${blue}$script ${green}::${normal}"
     elif [[ ${BASH_SOURCE[2]} ]] ; then
-        local prefix="[INFO - ${BASH_SOURCE[2]}]:"
-    else 
-        local prefix="[INFO]:"
+        local prefix="${bold}${blue}${BASH_SOURCE[2]} ${green}::${normal}"
     fi
-    printf "%s\n" "$prefix $message"
+    printf "%s\n" " $prefix $message"
 }
 
 log_error() {
     if [[ ${BASH_SOURCE[2]} ]] ; then
-        local prefix="[ERROR - ${BASH_SOURCE[2]}]:"
+        local prefix="${bold}${red}${BASH_SOURCE[2]} ${green}::${normal}"
     else 
-        local prefix="[ERROR]:"
+        local prefix="${bold}${red}error ${green}${bold}::${normal}"
     fi
-    printf "%s\n" "$prefix $1"
+    printf "%s\n" " $prefix $1"
 }
 
 
@@ -46,7 +48,7 @@ is_installed() {
 
     if ! [[ -x "$(command -v $1)" ]] ; then
         # log error
-        log_error "package [$1] is not installed"
+        log_error "package ${pink}[$1]${normal} is not installed"
 
         return 1
     fi
@@ -65,7 +67,7 @@ symlink() {
 
     # stop if source file / folder doesnt exists
     if ! [[ -f $1 ]] && ! [[ -d $1 ]] ; then
-        log_error "source file / folder doesnt exists [$1]"
+        log_error "source file / folder doesnt exists ${pink}[$1]${normal}"
         return 1
     fi
 
@@ -84,7 +86,7 @@ symlink() {
     rm -r $2
     ln -s $(realpath -s $1) $2
     
-    log_info "symlink created from: [$1] to [$2]"
+    log_info "symlink created from ${cyan}[$1]${normal} to ${cyan}[$2]${normal}"
 }
 
 ########################################
@@ -97,12 +99,12 @@ symlink() {
 copy_to_root() {
     
     if ! diff -qr $1 $2 &> /dev/null ; then
-        sudo chattr -i $2
+        sudo chattr -i $2 2> /dev/null
         sudo cp -r $1 $2
         sudo chown -R root:root $2
-        log_info "file copied from: [$1] to [$2]"
+        log_info "file copied from ${cyan}[$1]${normal} to ${cyan}[$2]${normal}"
     else
-        log_info "file already exists: [$2]"
+        log_info "file already exists ${cyan}[$2]${normal}"
         return 1
     fi
 }

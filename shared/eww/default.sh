@@ -224,4 +224,12 @@ subscribe_input_audio_volume() {
     done 
 }
 
+########################################
+# Function to wifi name
+########################################
+wifi_name() {
+    echo "$(nmcli | grep "^wl" | awk 'sub(/.*connected to /,"") {print $1}')"
+}
+
+
 "$@"

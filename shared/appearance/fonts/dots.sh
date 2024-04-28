@@ -19,9 +19,9 @@ new=$(find -L ~/.local/share/fonts | sort | md5sum)
 if [[ $old != $new ]] ; then 
     sudo fc-cache -f >> /dev/null
     printf "%s" "$new" > ~/.local/share/fonts-md5sum
-    log_info "fonts successfully installed at: [$HOME/.local/share/fonts]" "$script"
+    log_info "fonts successfully installed at ${cyan}[$HOME/.local/share/fonts]${normal}" "$script"
 else
-    log_info "fonts already installed at: [$HOME/.local/share/fonts]" "$script"
+    log_info "fonts already installed at ${cyan}[$HOME/.local/share/fonts]${normal}" "$script"
 fi
 
 #  # verify if has changes in fonts
