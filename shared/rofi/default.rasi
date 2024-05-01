@@ -6,7 +6,7 @@ configuration {
 }
 
 * {
-    font: "Ubuntu Mono 12";
+    font: "UbuntuMono Nerd Font Mono 12";
     background-color: transparent;
     padding: 0;
     margin: 0;

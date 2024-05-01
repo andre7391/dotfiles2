@@ -2,19 +2,31 @@
 format = '[$path ]($style)'
 
 [cmd_duration]
-format = '[::](bold) [󰦖  $duration ]($style)'
+format = '[::](bold) [󰦖 $duration ]($style)'
 
 [git_branch]
-format = '[::](bold) [󰊢  $branch ]($style)'
+format = '[::](bold) [ $branch ]($style)'
 
 [git_status]
 format = '([\[$all_status$ahead_behind\] ]($style))'
 
 [rlang]
-format = '[::](bold) [󰟔  ($version) ]($style)'
+format = '[::](bold) [󰟔 $version ]($style)'
+
+[java]
+format = '[::](bold) [ $version ]($style)'
+
+[package]
+format = '[::](bold) [󰏗 $version ]($style)'
+
+[gradle]
+format = '[::](bold) [ $version ]($style)'
+
+# [character] # The name of the module we are configuring is 'character'
+# success_symbol = '[](bold green)'
 
 
-
+# disabled = true
 # [aws]
 # symbol = "  "
 
@@ -148,9 +160,6 @@ format = '[::](bold) [󰟔  ($version) ]($style)'
 # Void = " "
 # Windows = "󰍲 "
 
-# [package]
-# symbol = "󰏗 "
-
 # [perl]
 # symbol = " "
 
@@ -243,8 +252,6 @@ format = '[::](bold) [󰟔  ($version) ]($style)'
 # [golang]
 # format = '\[[$symbol($version)]($style)\]'
 
-# [gradle]
-# format = '\[[$symbol($version)]($style)\]'
 
 # [guix_shell]
 # format = '\[[$symbol]($style)\]'

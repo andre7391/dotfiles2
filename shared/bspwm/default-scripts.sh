@@ -58,10 +58,10 @@ bspwm_change_theme() {
 
     # reload bspwm colors
     . ~/.cache/wallust/colors-bash.sh
-    bspc config normal_border_color "$color1"
-    bspc config active_border_color "$color2"
-    bspc config focused_border_color "$color15"
-    bspc config presel_feedback_color "$color1"
+    bspc config normal_border_color "$color10"
+    bspc config active_border_color "$color13"
+    bspc config focused_border_color "$foreground"
+    bspc config presel_feedback_color "$color13"
 
     # xsettingsd to reload gtk
     pkill xsettingsd

@@ -1,14 +1,8 @@
 #!/usr/bin/env bash
 
-# current directory
-dir=$(dirname ${BASH_SOURCE[0]})
-
-# parent directory
-parent=$(dirname $dir)
-
 # imports
-. $parent/shared/scripts/utils.sh
-. $parent/shared/scripts/arch.sh
+. shared/scripts/utils.sh
+. shared/scripts/arch.sh
 
 
 banner "Common Modules"

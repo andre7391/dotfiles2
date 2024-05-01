@@ -114,7 +114,7 @@
       :space-evenly false
       (label
         :class "icon"
-        :text "󰖩"
+        :text "󰤨"
       )
       (spacer)
       "${wifi-text}"
@@ -227,6 +227,7 @@
   (box
     :space-evenly false
     (label
+      :class "icon"
       :text {icon}
     )
   )

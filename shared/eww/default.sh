@@ -108,7 +108,7 @@ get_output_audio_volume() {
 get_output_audio_icon() {
     volume=$(get_output_audio_volume)
     if [[ $volume == "mute" ]] ; then 
-        echo "󰝟"
+        echo ""
     elif ((volume > 66)); then 
         echo ""
     elif ((volume > 33)); then 
@@ -175,9 +175,9 @@ get_input_audio_volume() {
 get_input_audio_icon() {
     volume=$(get_input_audio_volume)
     if [ $volume = "mute" ]; then 
-        echo "󰍭"
+        echo ""
     else
-        echo "󰍮"
+        echo ""
     fi
 }
 
