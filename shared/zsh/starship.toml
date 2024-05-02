@@ -1,5 +1,6 @@
 [directory]
 format = '[$path ]($style)'
+# home_symbol = "󰟐"
 
 [cmd_duration]
 format = '[::](bold) [󰦖 $duration ]($style)'
@@ -22,8 +23,9 @@ format = '[::](bold) [󰏗 $version ]($style)'
 [gradle]
 format = '[::](bold) [ $version ]($style)'
 
-# [character] # The name of the module we are configuring is 'character'
-# success_symbol = '[](bold green)'
+[character]
+success_symbol = "[>_](bold green)"
+error_symbol = "[>_](bold red)"
 
 
 # disabled = true
