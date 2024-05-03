@@ -11,10 +11,11 @@ else
 fi
 
 # theme
-symlink $dir/catppuccin-mocha/theme ~/.themes/catppuccin-mocha
+symlink $dir/catppuccin-macchiato ~/.themes/catppuccin-macchiato
+symlink $dir/catppuccin-mocha ~/.themes/catppuccin-mocha
 
 # cursor
-symlink $dir/catppuccin-mocha/cursor ~/.icons/catppuccin-mocha
+symlink $dir/catppuccin-cursor ~/.icons/catppuccin-cursor
 
 # configs
 symlink $dir/gtk2.conf ~/.gtkrc-2.0
